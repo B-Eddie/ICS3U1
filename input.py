@@ -1,3 +1,4 @@
+import math
 # dinnerCost = int(input("How much u spend on school dinner: "))
 
 # initialMoney = 200
@@ -20,8 +21,8 @@ A circle with radius ? cm has a circumference of ? cm and an area of ? cm^2.
 Output as follows: My name is ? and I am ? years old.'''
 
 # radius = int(input("Radius: "))
-# circumference = 2 * 3.14 * radius
-# area = 3.14 * radius ** 2
+# circumference = 2 * math.pi * radius
+# area = math.pi * radius ** 2
 # print("A circle with radius %i cm has a circumference of %i cm and an area of %i cm^2." %(radius, circumference, area))
 
 
