@@ -15,7 +15,7 @@ def watch_and_run():
 
     # Set window position (x=100, y=100)
     my_env = os.environ.copy()
-    # my_env["SDL_VIDEO_WINDOW_POS"] = "1500,100" # ipad
+    my_env["SDL_VIDEO_WINDOW_POS"] = "1500,100" # ipad
 
     try:
         while True:

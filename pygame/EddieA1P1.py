@@ -3,15 +3,8 @@
 # Course Code: ICS3U1
 # Description: Pygame House Project
 
-# TODO: Hank
-# TODO: remove unused variables
+# TODO: reread code
 # TODO: add comments to functions
-
-# *: grass
-# *: cloud
-# *: tree
-# *: sun
-# *: turn all variables inside the pygame.draw
 
 import pygame
 import math
@@ -33,7 +26,6 @@ DARKBROWN = (255, 87, 51)
 DARKDARKBROWN = (110,44,53)
 LIGHTBROWN = (188, 152, 126)
 TAN = (222, 184, 135)
-PERU = (205, 133, 63)
 BLUE = (173, 216, 230)
 DARKBLUE = (135,206,250)
 SKYBLUE = (135, 206, 235)
@@ -57,15 +49,10 @@ CLOUD2 = (245, 245, 250)
 CLOUD3 = (250, 250, 255)
 PEACH = (255, 218, 185)
 YELLOW = (255, 239, 13)
-LIGHTYELLOW = (255, 255, 224)
 BLACK = (0, 0, 0)
 SILVER = (218,222,223,255)
 LIGHTSILVER = (192,255,255)
 RED = (255,0,0)
-
-
-# Fill background with sky color
-screen.fill(SKYBLUE)
 
 # decorations behind the house
 # add a brawl stars character called hank
@@ -138,20 +125,12 @@ def draw_sun():  # define the sun
 
     pygame.draw.polygon(screen, YELLOW, [(sunx+38, suny+30), (sunx+50, suny+50), (sunx+60, suny+30)])
     pygame.draw.polygon(screen, YELLOW, [(sunx-38, suny-30), (sunx-50, suny-50), (sunx-60, suny-30)])
-draw_sun() # call the drawing sun function
 
-# Grass
-pygame.draw.rect(screen, GRASSGREEN, (0,500,1000,294)) # ground color
 def draw_grass(x, y, scale): # define the grass outlines
     pygame.draw.polygon(screen, BLACK, [(x+2.4989124401772*scale, y+2.286680913521*scale), (x+2.5859317156191*scale, y+1.8419157279289*scale), (x+2.8373207335625*scale, y+1.4454945842489*scale), (x+2.5472564820894*scale, y+1.580857901603*scale), (x+2.3828867395879*scale, y+1.7935716860167*scale), (x+2.4486629301395*scale, y+1.4610995311108*scale), (x+2.6129924930219*scale, y+1.1697880332736*scale), (x+2.3926414882477*scale, y+1.2631571030932*scale), (x+2.232046688158*scale, y+1.4685690566963*scale), (x+2.2992724184281*scale, y+1.0278670471478*scale), (x+2.508419134824*scale, y+0.7066774469684*scale), (x+2.2955376556353*scale, y+0.8149855679591*scale), (x+2.1498819067167*scale, y+1.0091932331839*scale), (x+2.0453085485188*scale, y+1.2071356612015*scale), (x+2.1200038043745*scale, y+0.9232936889499*scale), (x+2.265659553293*scale, y+0.7029426841756*scale), (x+2.0677171252755*scale, y+0.8336593819231*scale), (x+1.9108570879785*scale, y+1.042806098319*scale), (x+1.7913446786095*scale, y+1.3341175961561*scale), (x+1.8249575437445*scale, y+1.1025623030035*scale), (x+1.955674241492*scale, y+0.8187203307519*scale), (x+1.7054451343754*scale, y+1.0913580146252*scale), (x+1.6*scale, y+1.4*scale), (x+1.5187069947362*scale, y+1.8009629452541*scale), (x+1.4514812644661*scale, y+1.1100318285891*scale), (x+1.5037679435651*scale, y+0.7739031772385*scale), (x+1.3693164830249*scale, y+0.9606413168777*scale), (x+1.3394383806826*scale, y+1.4386909543541*scale), (x+1.2124564457279*scale, y+0.8784765354365*scale), (x+1.2087216829351*scale, y+1.371465224084*scale), (x+1.089209273566*scale, y+1.786023894083*scale), (x+0.9833577083121*scale, y+1.2270921490473*scale), (x+0.62487540562*scale, y+0.9025203344477*scale), (x+0.8354548669633*scale, y+1.1934373085644*scale), (x+0.8961593103599*scale, y+1.4693099211366*scale), (x+0.5764091052231*scale, y+1.0315337074768*scale), (x+0.2131051930682*scale, y+0.8395437137045*scale), (x+0.5699329611796*scale, y+1.1481043002599*scale), (x+0.7072294481303*scale, y+1.4886873429037*scale), (x+0.4436481523312*scale, y+1.290579469217*scale), (x+0.1113737287907*scale, y+1.2513139262563*scale), (x+0.511647664788*scale, y+1.5561013750007*scale), (x+0.7875333564857*scale, y+2.2673432967561*scale)], 2)
     pygame.draw.polygon(screen, GRASSGREEN, [(x+0.8*scale, y+2*scale), (x+2.5*scale, y+2*scale),(x+2.5*scale, y+3*scale), (x+0.8*scale, y+3*scale)])
 
-# calling the function to draw the grass
-draw_grass(random.randint(730, 780), random.randint(550, 650), 20) # right
-draw_grass(random.randint(800, 850), random.randint(550, 650), 20)
-draw_grass(random.randint(870, 930), random.randint(550, 650), 20)
-draw_grass(random.randint(200, 330), random.randint(600, 650), 20) # left side grass
-draw_grass(random.randint(10, 70), random.randint(500, 650), 20) 
+
 
 # helper function to draw the leaves of the trees
 def random_tree_leaf(x, y, scale):
@@ -212,27 +191,12 @@ def draw_tree(x, y, scale):
     random_tree_leaf(x+113*scale, y+61*scale, scale=scale)
     random_tree_leaf(x+108*scale, y+69*scale, scale=scale)
 
-# call functions to draw trees
-draw_tree(random.randint(600, 840), 220, 2)
-draw_tree(random.randint(-150, -80), 200, 2.4)
 
 # Make bushes
 def draw_bush(x,y,scale, color): #define bushes
     pygame.draw.polygon(screen, color, [(x+4.1981345727697*scale, y+12.5953185732367*scale), (x+3.401314524694*scale, y+12.2920016732171*scale), (x+2.4779552627364*scale, y+11.4579997591908*scale), (x+1.9715969577919*scale, y+10.5942120625208*scale), (x+1.8822396098605*scale, y+9.3729949741252*scale), (x+2.4183836974488*scale, y+7.7943484940041*scale), (x+3.2225998288312*scale, y+7.1986328411282*scale), (x+4.562960047802*scale, y+7.1986328411282*scale), (x+5.442225069294*scale, y+7.9801441506464*scale), (x+5.426747744472*scale, y+6.6922745361837*scale), (x+6*scale, y+6*scale), (x+7.0053942245932*scale, y+5.7987010568699*scale), (x+7.8100102078403*scale, y+6.2544702361126*scale), (x+7.9585392691946*scale, y+4.9944849254874*scale), (x+8.5542549220705*scale, y+4.041339880886*scale), (x+9.7456862278223*scale, y+3.3562668800787*scale), (x+11.2051895773682*scale, y+3.2966953147911*scale), (x+12.5753355789828*scale, y+4.0115540982422*scale), (x+13.6692751269549*scale, y+5.7327548666024*scale), (x+15.1071271037053*scale, y+5.2327711866378*scale), (x+16.2092010615257*scale, y+5.4114858825005*scale), (x+17.2814892367023*scale, y+6.1561304485954*scale), (x+17.8474191069344*scale, y+7.079489710553*scale), (x+17.9543157490172*scale, y+9.4174970777327*scale), (x+18.9792788473986*scale, y+9.2240660609062*scale), (x+19.7537091961373*scale, y+9.6112812352756*scale), (x+20.4089964143008*scale, y+10.564426279877*scale), (x+20*scale, y+12*scale), (x+19.2877483370648*scale, y+12.715714427739*scale), ])
     pygame.draw.polygon(screen, BLACK, [(x+4.1981345727697*scale, y+12.5953185732367*scale), (x+3.401314524694*scale, y+12.2920016732171*scale), (x+2.4779552627364*scale, y+11.4579997591908*scale), (x+1.9715969577919*scale, y+10.5942120625208*scale), (x+1.8822396098605*scale, y+9.3729949741252*scale), (x+2.4183836974488*scale, y+7.7943484940041*scale), (x+3.2225998288312*scale, y+7.1986328411282*scale), (x+4.562960047802*scale, y+7.1986328411282*scale), (x+5.442225069294*scale, y+7.9801441506464*scale), (x+5.426747744472*scale, y+6.6922745361837*scale), (x+6*scale, y+6*scale), (x+7.0053942245932*scale, y+5.7987010568699*scale), (x+7.8100102078403*scale, y+6.2544702361126*scale), (x+7.9585392691946*scale, y+4.9944849254874*scale), (x+8.5542549220705*scale, y+4.041339880886*scale), (x+9.7456862278223*scale, y+3.3562668800787*scale), (x+11.2051895773682*scale, y+3.2966953147911*scale), (x+12.5753355789828*scale, y+4.0115540982422*scale), (x+13.6692751269549*scale, y+5.7327548666024*scale), (x+15.1071271037053*scale, y+5.2327711866378*scale), (x+16.2092010615257*scale, y+5.4114858825005*scale), (x+17.2814892367023*scale, y+6.1561304485954*scale), (x+17.8474191069344*scale, y+7.079489710553*scale), (x+17.9543157490172*scale, y+9.4174970777327*scale), (x+18.9792788473986*scale, y+9.2240660609062*scale), (x+19.7537091961373*scale, y+9.6112812352756*scale), (x+20.4089964143008*scale, y+10.564426279877*scale), (x+20*scale, y+12*scale), (x+19.2877483370648*scale, y+12.715714427739*scale), ], 2)
 
-# call function to draw bushes
-random1 = random.randint(7, 9)
-draw_bush(650, 465-(8*random1), random1, random.choice([BUSH1, BUSH2, BUSH3, BUSH4, BUSH5]))
-random3 = random.randint(7, 9)
-draw_bush(880, 465-(8*random3), random3, random.choice([BUSH1, BUSH2, BUSH3, BUSH4, BUSH5]))
-random2 = random.randint(7, 9)
-draw_bush(760, 465-(8*random2), random2, random.choice([BUSH1, BUSH2, BUSH3, BUSH4, BUSH5]))
-# left side of screen
-random4 = random.randint(7, 9)
-draw_bush(-50, 465-(8*random4), random4, random.choice([BUSH1, BUSH2, BUSH3, BUSH4, BUSH5]))
-random5 = random.randint(7, 9)
-draw_bush(30, 465-(8*random5), random5, random.choice([BUSH1, BUSH2, BUSH3, BUSH4, BUSH5]))
 
 # function to draw clouds
 def draw_clouds(x, y, scale):
@@ -249,140 +213,171 @@ def draw_clouds(x, y, scale):
     pygame.draw.circle(screen, random.choice([CLOUD1, CLOUD2, CLOUD3]), (x+77*scale, y+63*scale), random.randint(10, 15)*scale)
     pygame.draw.circle(screen, random.choice([CLOUD1, CLOUD2, CLOUD3]), (x+91*scale, y+56*scale), random.randint(10, 15)*scale)
 
-draw_clouds(random.randint(650, 800), random.randint(40, 100), 2)
-draw_clouds(random.randint(0,100), random.randint(-30, 100), 2)
+
+def draw_moai(x, y, scale, arms):
+    if arms:
+        pygame.draw.polygon(screen, GRAY, [(x+9.0281179391314*scale, y+64.8287732588016*scale), (x+3.8221743164618*scale, y+66.1967745063683*scale), (x+2.2900743405351*scale, y+68.6076861117406*scale), (x+1.6580315984639*scale, y+71.9858562770129*scale), (x+1.1291555392046*scale, y+89.1558968202786*scale), (x+13*scale, y+89.5154122927963*scale), (x+14*scale, y+72.9597205001119*scale), (x+10.2604989025057*scale, y+68*scale), ])
+        pygame.draw.polygon(screen, GRAY, [(x+13.127988003853*scale, y+72.9597205001119*scale), (x+12.6951594602534*scale, y+89.5154122927963*scale), (x+49.7387408205621*scale, y+89.5201791367053*scale), (x+49.5613697190954*scale, y+71.6704848153251*scale), (x+45.6495510862714*scale, y+73.4059644495384*scale), (x+30.2458397766617*scale, y+76.3947442558806*scale), (x+15.5318468839003*scale, y+73.8657767274372*scale), ])
+        pygame.draw.polygon(screen, GRAY, [(x+49.5613697190954*scale, y+71.6704848153251*scale), (x+49.7387408205621*scale, y+89.5201791367053*scale), (x+60*scale, y+90*scale), (x+60.2701238980608*scale, y+70.6274561829937*scale), (x+59.1761852091886*scale, y+68.2668516438485*scale), (x+57.0458835519113*scale, y+66.7123071912407*scale), (x+53.6962659495003*scale, y+66.0489680031576*scale), ])
+        
+        pygame.draw.polygon(screen, BLACK, [(x+9.0281179391314*scale, y+64.8287732588016*scale), (x+3.8221743164618*scale, y+66.1967745063683*scale), (x+2.2900743405351*scale, y+68.6076861117406*scale), (x+1.6580315984639*scale, y+71.9858562770129*scale), (x+1.1291555392046*scale, y+89.1558968202786*scale), (x+13*scale, y+89.5154122927963*scale), (x+14*scale, y+72.9597205001119*scale), (x+10.2604989025057*scale, y+68*scale), ], 2)
+        pygame.draw.polygon(screen, BLACK, [(x+13.127988003853*scale, y+72.9597205001119*scale), (x+12.6951594602534*scale, y+89.5154122927963*scale), (x+49.7387408205621*scale, y+89.5201791367053*scale), (x+49.5613697190954*scale, y+71.6704848153251*scale), (x+45.6495510862714*scale, y+73.4059644495384*scale), (x+30.2458397766617*scale, y+76.3947442558806*scale), (x+15.5318468839003*scale, y+73.8657767274372*scale), ], 2)
+        pygame.draw.polygon(screen, BLACK, [(x+49.5613697190954*scale, y+71.6704848153251*scale), (x+49.7387408205621*scale, y+89.5201791367053*scale), (x+60*scale, y+90*scale), (x+60.2701238980608*scale, y+70.6274561829937*scale), (x+59.1761852091886*scale, y+68.2668516438485*scale), (x+57.0458835519113*scale, y+66.7123071912407*scale), (x+53.6962659495003*scale, y+66.0489680031576*scale), ], 2)
+
+    pygame.draw.polygon(screen, GRAY, [(x+13.2327854944063*scale, y+20.5275524911761*scale), (x+22.4290310523822*scale, y+14.7798990174411*scale), (x+32.0850888882569*scale, y+12.7107437668965*scale), (x+41.0514283072834*scale, y+14.0901806005929*scale), (x+50.7074861431581*scale, y+19.6079279353785*scale), (x+53.6962659495003*scale, y+66.0489680031576*scale), (x+45.6495510862714*scale, y+73.4059644495384*scale), (x+30.2458397766617*scale, y+76.3947442558806*scale), (x+15.5318468839003*scale, y+73.8657767274372*scale), (x+8.8645688543677*scale, y+65.12934344736*scale) ])
+    pygame.draw.polygon(screen, GRAY, [(x+13.2327854944063*scale, y+20.5275524911761*scale), (x+14.0718531943396*scale, y+11.7569566122905*scale), (x+19.4993975804086*scale, y+4.5202307641983*scale), (x+31.485224766311*scale, y+2.2587539366696*scale), (x+43.6971996349663*scale, y+3.6156400331868*scale), (x+49.3508917037882*scale, y+9.9477751502674*scale), (x+50.7074861431581*scale, y+19.6079279353785*scale), (x+41.0514283072834*scale, y+14.0901806005929*scale), (x+32.0850888882569*scale, y+12.7107437668965*scale), (x+22.4290310523822*scale, y+14.7798990174411*scale) ])
+    pygame.draw.polygon(screen, BLACK, [(x+13.2327854944063*scale, y+20.5275524911761*scale), (x+10.3996437989598*scale, y+20.6669547229725*scale), (x+5.9052865450517*scale, y+51.0267965810056*scale), (x+10.5830869521806*scale, y+51.5771260406678*scale) ])
+    pygame.draw.polygon(screen, BLACK, [(x+50.7074861431581*scale, y+19.6079279353785*scale), (x+54.3099846233044*scale, y+21.2968906008967*scale), (x+56.9007212743859*scale, y+51.5221515301814*scale), (x+52.7747332745153*scale, y+52.9614496696711*scale), ])
+    pygame.draw.polygon(screen, BLACK, [(x+27.0321195599917*scale, y+13.7411531588611*scale), (x+21.8614156491231*scale, y+40.5071498739461*scale), (x+41.4289814294691*scale, y+40.7099225763331*scale), (x+36.3089706941972*scale, y+13.7918463344579*scale), ], 2)
+    pygame.draw.polygon(screen, BLACK, [(x+22.9259723366549*scale, y+36.6037753529962*scale), (x+27.2855854379755*scale, y+35.4378323142709*scale), (x+31.2903463101188*scale, y+34.9309005583034*scale), (x+36.0555048162134*scale, y+35.5392186654644*scale), (x+40.3137315663405*scale, y+36.7051617041897*scale), (x+41.4289814294691*scale, y+40.7099225763331*scale), (x+21.8614156491231*scale, y+40.5071498739461*scale), ])
+    pygame.draw.polygon(screen, BLACK, [(x+18.602090867399*scale, y+51.5566943948494*scale), (x+24.1786161649373*scale, y+49.4750530849447*scale), (x+30.4211915037864*scale, y+48.9564922548442*scale), (x+36.1783201396212*scale, y+49.3733606783796*scale), (x+42.5554681571441*scale, y+51.7142824033346*scale), (x+36.5201262263936*scale, y+50.7866121230277*scale), (x+30.4227819341344*scale, y+50.2683378581856*scale), (x+25.2207872237759*scale, y+50.7687543524236*scale) ])
+    
+    # eye
+    pygame.draw.ellipse(screen, BLACK, (x+13.2327854944063*scale, y+20.5275524911761*scale, 14*scale, 4*scale))
+    pygame.draw.ellipse(screen, BLACK, (x+38*scale, y+21.8306275177138*scale, 14*scale, 4*scale))
+
+    # outlines
+    pygame.draw.polygon(screen, BLACK, [(x+13.2327854944063*scale, y+20.5275524911761*scale), (x+22.4290310523822*scale, y+14.7798990174411*scale), (x+32.0850888882569*scale, y+12.7107437668965*scale), (x+41.0514283072834*scale, y+14.0901806005929*scale), (x+50.7074861431581*scale, y+19.6079279353785*scale), (x+53.6962659495003*scale, y+66.0489680031576*scale), (x+45.6495510862714*scale, y+73.4059644495384*scale), (x+30.2458397766617*scale, y+76.3947442558806*scale), (x+15.5318468839003*scale, y+73.8657767274372*scale), (x+8.8645688543677*scale, y+65.12934344736*scale) ], 2)
+    pygame.draw.polygon(screen, BLACK, [(x+13.2327854944063*scale, y+20.5275524911761*scale), (x+14.0718531943396*scale, y+11.7569566122905*scale), (x+19.4993975804086*scale, y+4.5202307641983*scale), (x+31.485224766311*scale, y+2.2587539366696*scale), (x+43.6971996349663*scale, y+3.6156400331868*scale), (x+49.3508917037882*scale, y+9.9477751502674*scale), (x+50.7074861431581*scale, y+19.6079279353785*scale), (x+41.0514283072834*scale, y+14.0901806005929*scale), (x+32.0850888882569*scale, y+12.7107437668965*scale), (x+22.4290310523822*scale, y+14.7798990174411*scale) ], 2)
 
 
-# House
-# Draw frame of the house
-pygame.draw.polygon(screen, WHITE, [(132, 559), (136, 204), (257, 30), (580, 200), (686, 267), (693, 540), (415, 588)])  
-pygame.draw.polygon(screen, BLACK, [(132, 559), (136, 204), (257, 30), (580, 200), (686, 267), (693, 540), (415, 588)], 6) # house outline # left line of the roof
+def draw_house():
+    # House
+    # Draw frame of the house
+    pygame.draw.polygon(screen, WHITE, [(132, 559), (136, 204), (257, 30), (580, 200), (686, 267), (693, 540), (415, 588)])  
+    pygame.draw.polygon(screen, BLACK, [(132, 559), (136, 204), (257, 30), (580, 200), (686, 267), (693, 540), (415, 588)], 6) # house outline # left line of the roof
 
-# Front face of house 
-pygame.draw.line(screen, BLACK, (415, 588), (411, 126), 6) # Line separating front and right face of house
-pygame.draw.polygon(screen, HOTPINK, [(148, 210), (257, 56), (391, 139), (392, 558), (146, 540)]) # Face color
-pygame.draw.polygon(screen, BLACK, [(148, 210), (257, 56), (391, 139), (392, 558), (146, 540)], 5) # Face border
-pygame.draw.line(screen, BLACK, (262, 60), (155, 212), 4)
-pygame.draw.line(screen, BLACK, (155, 212), (153, 540), 3)
+    # Front face of house 
+    pygame.draw.line(screen, BLACK, (415, 588), (411, 126), 6) # Line separating front and right face of house
+    pygame.draw.polygon(screen, HOTPINK, [(148, 210), (257, 56), (391, 139), (392, 558), (146, 540)]) # Face color
+    pygame.draw.polygon(screen, BLACK, [(148, 210), (257, 56), (391, 139), (392, 558), (146, 540)], 5) # Face border
+    pygame.draw.line(screen, BLACK, (262, 60), (155, 212), 4)
+    pygame.draw.line(screen, BLACK, (155, 212), (153, 540), 3)
 
-# Straight lines of the side of the house
-pygame.draw.line(screen, BLACK, (243, 87), (285, 73), 3)
-pygame.draw.line(screen, BLACK, (224, 114), (305, 86), 3)
-pygame.draw.line(screen, BLACK, (203, 143), (330, 101), 3)
-pygame.draw.line(screen, BLACK, (187, 167), (352, 115), 3)
-pygame.draw.line(screen, BLACK, (170, 190), (378, 131), 3)
-pygame.draw.line(screen, BLACK, (155, 215), (391, 152), 3)
-pygame.draw.line(screen, BLACK, (154, 234), (391, 176), 3)
-pygame.draw.line(screen, BLACK, (154, 253), (391, 200), 3)
-pygame.draw.line(screen, BLACK, (154, 273), (391, 224), 3)
-pygame.draw.line(screen, BLACK, (154, 292), (391, 248), 3)
-pygame.draw.line(screen, BLACK, (153, 423), (392, 417), 3)
-pygame.draw.line(screen, BLACK, (153, 438), (392, 433), 3)
-pygame.draw.line(screen, BLACK, (152, 458), (392, 458), 3)
-pygame.draw.line(screen, BLACK, (152, 478), (392, 483), 3)
-pygame.draw.line(screen, BLACK, (152, 499), (392, 509), 3)
-pygame.draw.line(screen, BLACK, (152, 519), (392, 534), 3)
+    # Straight lines of the side of the house
+    pygame.draw.line(screen, BLACK, (243, 87), (285, 73), 3)
+    pygame.draw.line(screen, BLACK, (224, 114), (305, 86), 3)
+    pygame.draw.line(screen, BLACK, (203, 143), (330, 101), 3)
+    pygame.draw.line(screen, BLACK, (187, 167), (352, 115), 3)
+    pygame.draw.line(screen, BLACK, (170, 190), (378, 131), 3)
+    pygame.draw.line(screen, BLACK, (155, 215), (391, 152), 3)
+    pygame.draw.line(screen, BLACK, (154, 234), (391, 176), 3)
+    pygame.draw.line(screen, BLACK, (154, 253), (391, 200), 3)
+    pygame.draw.line(screen, BLACK, (154, 273), (391, 224), 3)
+    pygame.draw.line(screen, BLACK, (154, 292), (391, 248), 3)
+    pygame.draw.line(screen, BLACK, (153, 423), (392, 417), 3)
+    pygame.draw.line(screen, BLACK, (153, 438), (392, 433), 3)
+    pygame.draw.line(screen, BLACK, (152, 458), (392, 458), 3)
+    pygame.draw.line(screen, BLACK, (152, 478), (392, 483), 3)
+    pygame.draw.line(screen, BLACK, (152, 499), (392, 509), 3)
+    pygame.draw.line(screen, BLACK, (152, 519), (392, 534), 3)
 
-# Windows
-# line seperating the windows
-pygame.draw.line(screen, BLACK, (262, 272), (261, 421), 2)
-# left window
-pygame.draw.polygon(screen, BLUE, [(160, 296), (257, 278), (256, 414), (159, 418)])
-pygame.draw.polygon(screen, BLACK, [(160, 296), (257, 278), (256, 414), (159, 418)], 3)  
-# window glare
-pygame.draw.line(screen,WHITE, (184, 359), (218, 309), 5)
-pygame.draw.line(screen,WHITE, (176, 390), (213, 333), 5)
-# right window
-pygame.draw.polygon(screen, DARKBLUE, [(266, 276), (391, 253), (392, 408), (266, 414)])
-pygame.draw.polygon(screen, BLACK, [(266, 276), (391, 253), (392, 408), (266, 414)], 3)  
+    # Windows
+    # line seperating the windows
+    pygame.draw.line(screen, BLACK, (262, 272), (261, 421), 2)
+    # left window
+    pygame.draw.polygon(screen, BLUE, [(160, 296), (257, 278), (256, 414), (159, 418)])
+    pygame.draw.polygon(screen, BLACK, [(160, 296), (257, 278), (256, 414), (159, 418)], 3)  
+    # window glare
+    pygame.draw.line(screen,WHITE, (184, 359), (218, 309), 5)
+    pygame.draw.line(screen,WHITE, (176, 390), (213, 333), 5)
+    # right window
+    pygame.draw.polygon(screen, DARKBLUE, [(266, 276), (391, 253), (392, 408), (266, 414)])
+    pygame.draw.polygon(screen, BLACK, [(266, 276), (391, 253), (392, 408), (266, 414)], 3)  
 
-# Roof
-pygame.draw.line(screen, BLACK, (257, 30), (411, 126), 5) # left border
-pygame.draw.line(screen, BLACK, (411, 126), (686, 267), 5) # bottom border
+    # Roof
+    pygame.draw.line(screen, BLACK, (257, 30), (411, 126), 5) # left border
+    pygame.draw.line(screen, BLACK, (411, 126), (686, 267), 5) # bottom border
 
-# Right side of house
-pygame.draw.polygon(screen, LIGHTPINK, [(429, 150), (429, 586), (693, 540), (687, 274)]) # right face color
-pygame.draw.polygon(screen, LIGHTBROWN, [(428, 243), (539, 281), (543, 435), (429, 427)]) # line pattern background color
-pygame.draw.line(screen, BLACK, (412, 142), (687, 274), 5) # right face top border
-pygame.draw.line(screen, BLACK, (429, 150), (429, 586), 5) # right face left border
-# line pattern on right side
-pygame.draw.line(screen, BLACK, (428, 243), (539, 281), 6)
-pygame.draw.line(screen, BLACK, (428, 253), (540, 289), 4)
-pygame.draw.line(screen, BLACK, (428, 267), (540, 301), 4)
-pygame.draw.line(screen, BLACK, (429, 293), (541, 322), 4)
-pygame.draw.line(screen, BLACK, (429, 317), (541, 342), 4)
-pygame.draw.line(screen, BLACK, (429, 343), (541, 364), 4)
-pygame.draw.line(screen, BLACK, (429, 368), (542, 384), 4)
-pygame.draw.line(screen, BLACK, (429, 393), (542, 405), 4)
-pygame.draw.line(screen, BLACK, (429, 417), (543, 426), 4)
-pygame.draw.line(screen, BLACK, (429, 427), (543, 435), 6)
+    # Right side of house
+    pygame.draw.polygon(screen, LIGHTPINK, [(429, 150), (429, 586), (693, 540), (687, 274)]) # right face color
+    pygame.draw.polygon(screen, LIGHTBROWN, [(428, 243), (539, 281), (543, 435), (429, 427)]) # line pattern background color
+    pygame.draw.line(screen, BLACK, (412, 142), (687, 274), 5) # right face top border
+    pygame.draw.line(screen, BLACK, (429, 150), (429, 586), 5) # right face left border
+    # line pattern on right side
+    pygame.draw.line(screen, BLACK, (428, 243), (539, 281), 6)
+    pygame.draw.line(screen, BLACK, (428, 253), (540, 289), 4)
+    pygame.draw.line(screen, BLACK, (428, 267), (540, 301), 4)
+    pygame.draw.line(screen, BLACK, (429, 293), (541, 322), 4)
+    pygame.draw.line(screen, BLACK, (429, 317), (541, 342), 4)
+    pygame.draw.line(screen, BLACK, (429, 343), (541, 364), 4)
+    pygame.draw.line(screen, BLACK, (429, 368), (542, 384), 4)
+    pygame.draw.line(screen, BLACK, (429, 393), (542, 405), 4)
+    pygame.draw.line(screen, BLACK, (429, 417), (543, 426), 4)
+    pygame.draw.line(screen, BLACK, (429, 427), (543, 435), 6)
 
 
-# Right window
-pygame.draw.line(screen, BLACK, (658, 329), (658, 440), 3) # window right border
-# opened window
-pygame.draw.polygon(screen, BLUE, [(620, 313), (653, 324), (758, 311), (730, 297)])
-pygame.draw.polygon(screen, LIGHTBROWN, [(605, 325), (639, 334), (640, 429), (607, 427)]) # opened window inside
-pygame.draw.polygon(screen, WHITE, [(603, 309), (730, 291), (730, 297), (605, 316)]) # top window border
-pygame.draw.polygon(screen, BLACK, [(603, 309), (730, 291), (730, 297), (605, 316)], 3)
+    # Right window
+    pygame.draw.line(screen, BLACK, (658, 329), (658, 440), 3) # window right border
+    # opened window
+    pygame.draw.polygon(screen, BLUE, [(620, 313), (653, 324), (758, 311), (730, 297)])
+    pygame.draw.polygon(screen, LIGHTBROWN, [(605, 325), (639, 334), (640, 429), (607, 427)]) # opened window inside
+    pygame.draw.polygon(screen, WHITE, [(603, 309), (730, 291), (730, 297), (605, 316)]) # top window border
+    pygame.draw.polygon(screen, BLACK, [(603, 309), (730, 291), (730, 297), (605, 316)], 3)
 
-pygame.draw.polygon(screen, WHITE, [(766, 309), (730, 291), (730, 297), (765, 314)])  # right window border
-pygame.draw.polygon(screen, BLACK, [(766, 309), (730, 291), (730, 297), (765, 314)], 3)  # right window border
-pygame.draw.line(screen, BLACK, (765, 314), (766, 309), 3) # bottom window border
-pygame.draw.polygon(screen, WHITE, [(758, 311), (765, 314), (652, 330), (653, 324)])
-pygame.draw.polygon(screen, BLACK, [(758, 311), (765, 314), (652, 330), (653, 324)], 3)
-pygame.draw.polygon(screen, WHITE, [(605, 316), (620, 315), (653, 324), (652, 330), (605, 316)]) # left window border
-pygame.draw.line(screen, BLACK, (620, 313), (653, 324), 3)
+    pygame.draw.polygon(screen, WHITE, [(766, 309), (730, 291), (730, 297), (765, 314)])  # right window border
+    pygame.draw.polygon(screen, BLACK, [(766, 309), (730, 291), (730, 297), (765, 314)], 3)  # right window border
+    pygame.draw.line(screen, BLACK, (765, 314), (766, 309), 3) # bottom window border
+    pygame.draw.polygon(screen, WHITE, [(758, 311), (765, 314), (652, 330), (653, 324)])
+    pygame.draw.polygon(screen, BLACK, [(758, 311), (765, 314), (652, 330), (653, 324)], 3)
+    pygame.draw.polygon(screen, WHITE, [(605, 316), (620, 315), (653, 324), (652, 330), (605, 316)]) # left window border
+    pygame.draw.line(screen, BLACK, (620, 313), (653, 324), 3)
 
-# right window frame (opening under opened window)
-pygame.draw.polygon(screen, WHITE, [(591, 430), (591, 437), (658, 440), (658, 435)])
-pygame.draw.polygon(screen, WHITE, [(652, 330), (657, 330), (658, 440), (652, 441)])
-pygame.draw.line(screen, BLACK, (597, 308), (603, 308), 3)
-pygame.draw.line(screen, BLACK, (597, 308), (600, 431), 3)
-# right inner window frame
-pygame.draw.polygon(screen, BLACK, [(603, 308), (605, 316), (647, 329), (647, 429), (606, 426)], 3)
-pygame.draw.line(screen, BLACK, (638, 428), (638, 334), 3)
-pygame.draw.line(screen, BLACK, (604, 325), (638, 334), 3)
-pygame.draw.line(screen, BLACK, (647, 329), (638, 334), 3)
-pygame.draw.line(screen, BLACK, (653, 434), (591, 430), 2)
-pygame.draw.line(screen, BLACK, (653, 434), (652, 330), 3)
-pygame.draw.line(screen, BLACK, (591, 437), (658, 440), 3)
-pygame.draw.line(screen, BLACK, (604, 358), (630, 311), 4) # lines holding window up
-pygame.draw.line(screen, BLACK, (673, 327), (648, 366), 4)
+    # right window frame (opening under opened window)
+    pygame.draw.polygon(screen, WHITE, [(591, 430), (591, 437), (658, 440), (658, 435)])
+    pygame.draw.polygon(screen, WHITE, [(652, 330), (657, 330), (658, 440), (652, 441)])
+    pygame.draw.line(screen, BLACK, (597, 308), (603, 308), 3)
+    pygame.draw.line(screen, BLACK, (597, 308), (600, 431), 3)
+    # right inner window frame
+    pygame.draw.polygon(screen, BLACK, [(603, 308), (605, 316), (647, 329), (647, 429), (606, 426)], 3)
+    pygame.draw.line(screen, BLACK, (638, 428), (638, 334), 3)
+    pygame.draw.line(screen, BLACK, (604, 325), (638, 334), 3)
+    pygame.draw.line(screen, BLACK, (647, 329), (638, 334), 3)
+    pygame.draw.line(screen, BLACK, (653, 434), (591, 430), 2)
+    pygame.draw.line(screen, BLACK, (653, 434), (652, 330), 3)
+    pygame.draw.line(screen, BLACK, (591, 437), (658, 440), 3)
+    pygame.draw.line(screen, BLACK, (604, 358), (630, 311), 4) # lines holding window up
+    pygame.draw.line(screen, BLACK, (673, 327), (648, 366), 4)
 
-# Door
-pygame.draw.polygon(screen, WHITE, [(539, 262), (589, 281), (593, 546), (540, 552)]) # frame color
-pygame.draw.polygon(screen, BLACK, [(539, 262), (589, 281), (593, 546), (540, 552)], 4)  
-pygame.draw.line(screen, BLACK, (593, 540), (545, 546), 2) # door bottom line
-pygame.draw.polygon(screen, TAN, [(585, 530), (582, 295),  (550, 285), (551, 533)]) # inner door frame
-pygame.draw.polygon(screen, BLACK, [(585, 530), (582, 295), (550, 285), (551, 533)], 4) # inner door frame border
-pygame.draw.line(screen, BLACK, (580, 531), (577, 294), 2) # door right frame vertical line
-pygame.draw.line(screen, BLACK, (558, 408), (562, 410), 2) # door knob
-pygame.draw.line(screen, BLACK, (562, 409), (562, 423), 3)
-pygame.draw.line(screen, BLACK, (558, 422), (562, 421), 2)
+    # Door
+    pygame.draw.polygon(screen, WHITE, [(539, 262), (589, 281), (593, 546), (540, 552)]) # frame color
+    pygame.draw.polygon(screen, BLACK, [(539, 262), (589, 281), (593, 546), (540, 552)], 4)  
+    pygame.draw.line(screen, BLACK, (593, 540), (545, 546), 2) # door bottom line
+    pygame.draw.polygon(screen, TAN, [(585, 530), (582, 295),  (550, 285), (551, 533)]) # inner door frame
+    pygame.draw.polygon(screen, BLACK, [(585, 530), (582, 295), (550, 285), (551, 533)], 4) # inner door frame border
+    pygame.draw.line(screen, BLACK, (580, 531), (577, 294), 2) # door right frame vertical line
+    pygame.draw.line(screen, BLACK, (558, 408), (562, 410), 2) # door knob
+    pygame.draw.line(screen, BLACK, (562, 409), (562, 423), 3)
+    pygame.draw.line(screen, BLACK, (558, 422), (562, 421), 2)
 
-# house platform
-pygame.draw.polygon(screen, LIGHTBROWN, [(165, 585), (165, 566), (382, 588), (382, 607)]) # left rect
-pygame.draw.polygon(screen, BLACK, [(165, 585), (165, 566), (382, 588), (382, 607)], 5)
-pygame.draw.polygon(screen, LIGHTBROWN, [(660, 565), (660, 549), (381, 588), (382, 607)]) # right rect
-pygame.draw.polygon(screen, BLACK, [(660, 565), (660, 549), (382, 588), (382, 607)], 5)
-pygame.draw.polygon(screen, BROWN, [(177, 585), (190, 587), (190, 638), (184, 642), (177, 642)]) # pillar 1
-pygame.draw.polygon(screen, BLACK, [(177, 585), (190, 587), (190, 638), (184, 642), (177, 642)], 4)  
-pygame.draw.line(screen, BLACK, (184, 642), (184, 586), 3)
-pygame.draw.polygon(screen, BROWN, [(416, 583), (430, 581), (432, 674), (425, 676), (417, 674)]) # pillar 2
-pygame.draw.polygon(screen, BLACK, [(416, 583), (430, 581), (432, 674), (425, 676), (417, 674)], 4)  
-pygame.draw.line(screen, BLACK, (425, 676), (425, 582), 3)
-pygame.draw.polygon(screen, BROWN, [(660, 549), (672, 547), (673, 590), (668, 595), (661, 595)]) # pillar 3
-pygame.draw.polygon(screen, BLACK, [(660, 549), (672, 547), (673, 590), (668, 595), (661, 595)], 3)  
-pygame.draw.line(screen, BLACK, (667, 548), (668, 596), 3)
+    # house platform
+    pygame.draw.polygon(screen, LIGHTBROWN, [(165, 585), (165, 566), (382, 588), (382, 607)]) # left rect
+    pygame.draw.polygon(screen, BLACK, [(165, 585), (165, 566), (382, 588), (382, 607)], 5)
+    pygame.draw.polygon(screen, LIGHTBROWN, [(660, 565), (660, 549), (381, 588), (382, 607)]) # right rect
+    pygame.draw.polygon(screen, BLACK, [(660, 565), (660, 549), (382, 588), (382, 607)], 5)
+    pygame.draw.polygon(screen, BROWN, [(177, 585), (190, 587), (190, 638), (184, 642), (177, 642)]) # pillar 1
+    pygame.draw.polygon(screen, BLACK, [(177, 585), (190, 587), (190, 638), (184, 642), (177, 642)], 4)  
+    pygame.draw.line(screen, BLACK, (184, 642), (184, 586), 3)
+    pygame.draw.polygon(screen, BROWN, [(416, 583), (430, 581), (432, 674), (425, 676), (417, 674)]) # pillar 2
+    pygame.draw.polygon(screen, BLACK, [(416, 583), (430, 581), (432, 674), (425, 676), (417, 674)], 4)  
+    pygame.draw.line(screen, BLACK, (425, 676), (425, 582), 3)
+    pygame.draw.polygon(screen, BROWN, [(660, 549), (672, 547), (673, 590), (668, 595), (661, 595)]) # pillar 3
+    pygame.draw.polygon(screen, BLACK, [(660, 549), (672, 547), (673, 590), (668, 595), (661, 595)], 3)  
+    pygame.draw.line(screen, BLACK, (667, 548), (668, 596), 3)
 
-#Wheels
-pygame.draw.polygon(screen, BLACK, [(567, 563), (561, 576), (558, 594), (561, 610), (567, 622), (589, 621), (582, 606), (581, 592), (582, 575), (592, 560)])
-pygame.draw.polygon(screen, BLACK, [(631, 551), (628, 555), (624, 563), (622, 570), (621, 580), (622, 587), (623, 594), (625, 602), (628, 608), (634, 614), (615, 613), (611, 614), (609, 611), (610, 604), (611, 598), (611, 588), (610, 579), (608, 572), (604, 565), (604, 560), (604, 556)])
-pygame.draw.ellipse(screen, SILVER, (580, 562.53, 33, 60))  #Left wheel
-pygame.draw.ellipse(screen, BLACK, (583, 571.03, 20, 46))
-pygame.draw.ellipse(screen, SILVER, (618, 553.53, 33, 60))  #Right wheel
-pygame.draw.ellipse(screen, BLACK, (621, 562.03, 20, 46))
+    #Wheels
+    pygame.draw.polygon(screen, BLACK, [(567, 563), (561, 576), (558, 594), (561, 610), (567, 622), (589, 621), (582, 606), (581, 592), (582, 575), (592, 560)])
+    pygame.draw.polygon(screen, BLACK, [(631, 551), (628, 555), (624, 563), (622, 570), (621, 580), (622, 587), (623, 594), (625, 602), (628, 608), (634, 614), (615, 613), (611, 614), (609, 611), (610, 604), (611, 598), (611, 588), (610, 579), (608, 572), (604, 565), (604, 560), (604, 556)])
+    pygame.draw.ellipse(screen, SILVER, (580, 562.53, 33, 60))  #Left wheel
+    pygame.draw.ellipse(screen, BLACK, (583, 571.03, 20, 46))
+    pygame.draw.ellipse(screen, SILVER, (618, 553.53, 33, 60))  #Right wheel
+    pygame.draw.ellipse(screen, BLACK, (621, 562.03, 20, 46))
+
+    # draw moais, one of them is behind window, so need to draw window shine after moai
+    draw_moai(random.randint(700, 900), 440, 1, True)
+    draw_moai(280, 298, 1.5, False) # put moai behind window
+    pygame.draw.line(screen,WHITE, (308, 329), (338, 286), 5) # window shine
+    pygame.draw.line(screen,WHITE, (295, 370), (345, 299), 5)
 
 def draw_egg(x, y, scale, color):
     # Base dimensions
@@ -418,70 +413,123 @@ def draw_egg(x, y, scale, color):
     pygame.draw.circle(screen, BLUE, (int(x + 40*scale), int(y + 30*scale)), int(5*scale))
 
 
-draw_egg(random.randint(700, 750), random.randint(550, 650), random.uniform(0.5, 0.8), random.choice([HOTPINK, BLUE, SKYBLUE]))
-draw_egg(random.randint(766, 820), random.randint(550, 650), random.uniform(0.5, 0.8), random.choice([HOTPINK, BLUE, SKYBLUE]))
-draw_egg(random.randint(832, 900), random.randint(550, 650), random.uniform(0.5, 0.8), random.choice([HOTPINK, BLUE, SKYBLUE]))
 
-def draw_moai(x, y, scale, arms):
-    if arms:
-        pygame.draw.polygon(screen, GRAY, [(x+9.0281179391314*scale, y+64.8287732588016*scale), (x+3.8221743164618*scale, y+66.1967745063683*scale), (x+2.2900743405351*scale, y+68.6076861117406*scale), (x+1.6580315984639*scale, y+71.9858562770129*scale), (x+1.1291555392046*scale, y+89.1558968202786*scale), (x+13*scale, y+89.5154122927963*scale), (x+14*scale, y+72.9597205001119*scale), (x+10.2604989025057*scale, y+68*scale), ])
-        pygame.draw.polygon(screen, GRAY, [(x+13.127988003853*scale, y+72.9597205001119*scale), (x+12.6951594602534*scale, y+89.5154122927963*scale), (x+49.7387408205621*scale, y+89.5201791367053*scale), (x+49.5613697190954*scale, y+71.6704848153251*scale), (x+45.6495510862714*scale, y+73.4059644495384*scale), (x+30.2458397766617*scale, y+76.3947442558806*scale), (x+15.5318468839003*scale, y+73.8657767274372*scale), ])
-        pygame.draw.polygon(screen, GRAY, [(x+49.5613697190954*scale, y+71.6704848153251*scale), (x+49.7387408205621*scale, y+89.5201791367053*scale), (x+60*scale, y+90*scale), (x+60.2701238980608*scale, y+70.6274561829937*scale), (x+59.1761852091886*scale, y+68.2668516438485*scale), (x+57.0458835519113*scale, y+66.7123071912407*scale), (x+53.6962659495003*scale, y+66.0489680031576*scale), ])
-        
-        pygame.draw.polygon(screen, BLACK, [(x+9.0281179391314*scale, y+64.8287732588016*scale), (x+3.8221743164618*scale, y+66.1967745063683*scale), (x+2.2900743405351*scale, y+68.6076861117406*scale), (x+1.6580315984639*scale, y+71.9858562770129*scale), (x+1.1291555392046*scale, y+89.1558968202786*scale), (x+13*scale, y+89.5154122927963*scale), (x+14*scale, y+72.9597205001119*scale), (x+10.2604989025057*scale, y+68*scale), ], 2)
-        pygame.draw.polygon(screen, BLACK, [(x+13.127988003853*scale, y+72.9597205001119*scale), (x+12.6951594602534*scale, y+89.5154122927963*scale), (x+49.7387408205621*scale, y+89.5201791367053*scale), (x+49.5613697190954*scale, y+71.6704848153251*scale), (x+45.6495510862714*scale, y+73.4059644495384*scale), (x+30.2458397766617*scale, y+76.3947442558806*scale), (x+15.5318468839003*scale, y+73.8657767274372*scale), ], 2)
-        pygame.draw.polygon(screen, BLACK, [(x+49.5613697190954*scale, y+71.6704848153251*scale), (x+49.7387408205621*scale, y+89.5201791367053*scale), (x+60*scale, y+90*scale), (x+60.2701238980608*scale, y+70.6274561829937*scale), (x+59.1761852091886*scale, y+68.2668516438485*scale), (x+57.0458835519113*scale, y+66.7123071912407*scale), (x+53.6962659495003*scale, y+66.0489680031576*scale), ], 2)
+def draw_everything():
+    # Fill background with sky color
+    screen.fill(SKYBLUE)
+    # Grass
+    pygame.draw.rect(screen, GRASSGREEN, (0,500,1000,294)) # ground color & ground grass
+    draw_sun() # call the drawing sun function
+    # calling the function to draw the grass
+    draw_grass(random.randint(730, 780), random.randint(550, 650), 20) # right
+    draw_grass(random.randint(800, 850), random.randint(550, 650), 20)
+    draw_grass(random.randint(870, 930), random.randint(550, 650), 20)
+    draw_grass(random.randint(200, 330), random.randint(600, 650), 20) # left side grass
+    draw_grass(random.randint(10, 70), random.randint(500, 650), 20) 
 
-    pygame.draw.polygon(screen, GRAY, [(x+13.2327854944063*scale, y+20.5275524911761*scale), (x+22.4290310523822*scale, y+14.7798990174411*scale), (x+32.0850888882569*scale, y+12.7107437668965*scale), (x+41.0514283072834*scale, y+14.0901806005929*scale), (x+50.7074861431581*scale, y+19.6079279353785*scale), (x+53.6962659495003*scale, y+66.0489680031576*scale), (x+45.6495510862714*scale, y+73.4059644495384*scale), (x+30.2458397766617*scale, y+76.3947442558806*scale), (x+15.5318468839003*scale, y+73.8657767274372*scale), (x+8.8645688543677*scale, y+65.12934344736*scale) ])
-    pygame.draw.polygon(screen, GRAY, [(x+13.2327854944063*scale, y+20.5275524911761*scale), (x+14.0718531943396*scale, y+11.7569566122905*scale), (x+19.4993975804086*scale, y+4.5202307641983*scale), (x+31.485224766311*scale, y+2.2587539366696*scale), (x+43.6971996349663*scale, y+3.6156400331868*scale), (x+49.3508917037882*scale, y+9.9477751502674*scale), (x+50.7074861431581*scale, y+19.6079279353785*scale), (x+41.0514283072834*scale, y+14.0901806005929*scale), (x+32.0850888882569*scale, y+12.7107437668965*scale), (x+22.4290310523822*scale, y+14.7798990174411*scale) ])
-    pygame.draw.polygon(screen, BLACK, [(x+13.2327854944063*scale, y+20.5275524911761*scale), (x+10.3996437989598*scale, y+20.6669547229725*scale), (x+5.9052865450517*scale, y+51.0267965810056*scale), (x+10.5830869521806*scale, y+51.5771260406678*scale) ])
-    pygame.draw.polygon(screen, BLACK, [(x+50.7074861431581*scale, y+19.6079279353785*scale), (x+54.3099846233044*scale, y+21.2968906008967*scale), (x+56.9007212743859*scale, y+51.5221515301814*scale), (x+52.7747332745153*scale, y+52.9614496696711*scale), ])
-    pygame.draw.polygon(screen, BLACK, [(x+27.0321195599917*scale, y+13.7411531588611*scale), (x+21.8614156491231*scale, y+40.5071498739461*scale), (x+41.4289814294691*scale, y+40.7099225763331*scale), (x+36.3089706941972*scale, y+13.7918463344579*scale), ], 2)
-    pygame.draw.polygon(screen, BLACK, [(x+22.9259723366549*scale, y+36.6037753529962*scale), (x+27.2855854379755*scale, y+35.4378323142709*scale), (x+31.2903463101188*scale, y+34.9309005583034*scale), (x+36.0555048162134*scale, y+35.5392186654644*scale), (x+40.3137315663405*scale, y+36.7051617041897*scale), (x+41.4289814294691*scale, y+40.7099225763331*scale), (x+21.8614156491231*scale, y+40.5071498739461*scale), ])
-    pygame.draw.polygon(screen, BLACK, [(x+18.602090867399*scale, y+51.5566943948494*scale), (x+24.1786161649373*scale, y+49.4750530849447*scale), (x+30.4211915037864*scale, y+48.9564922548442*scale), (x+36.1783201396212*scale, y+49.3733606783796*scale), (x+42.5554681571441*scale, y+51.7142824033346*scale), (x+36.5201262263936*scale, y+50.7866121230277*scale), (x+30.4227819341344*scale, y+50.2683378581856*scale), (x+25.2207872237759*scale, y+50.7687543524236*scale) ])
-    
-    # eye
-    pygame.draw.ellipse(screen, BLACK, (x+13.2327854944063*scale, y+20.5275524911761*scale, 14*scale, 4*scale))
-    pygame.draw.ellipse(screen, BLACK, (x+38*scale, y+21.8306275177138*scale, 14*scale, 4*scale))
+    # call functions to draw trees
+    draw_tree(random.randint(600, 840), 220, 2)
+    draw_tree(random.randint(-150, -80), 200, 2.4)
 
-    # outlines
-    pygame.draw.polygon(screen, BLACK, [(x+13.2327854944063*scale, y+20.5275524911761*scale), (x+22.4290310523822*scale, y+14.7798990174411*scale), (x+32.0850888882569*scale, y+12.7107437668965*scale), (x+41.0514283072834*scale, y+14.0901806005929*scale), (x+50.7074861431581*scale, y+19.6079279353785*scale), (x+53.6962659495003*scale, y+66.0489680031576*scale), (x+45.6495510862714*scale, y+73.4059644495384*scale), (x+30.2458397766617*scale, y+76.3947442558806*scale), (x+15.5318468839003*scale, y+73.8657767274372*scale), (x+8.8645688543677*scale, y+65.12934344736*scale) ], 2)
-    pygame.draw.polygon(screen, BLACK, [(x+13.2327854944063*scale, y+20.5275524911761*scale), (x+14.0718531943396*scale, y+11.7569566122905*scale), (x+19.4993975804086*scale, y+4.5202307641983*scale), (x+31.485224766311*scale, y+2.2587539366696*scale), (x+43.6971996349663*scale, y+3.6156400331868*scale), (x+49.3508917037882*scale, y+9.9477751502674*scale), (x+50.7074861431581*scale, y+19.6079279353785*scale), (x+41.0514283072834*scale, y+14.0901806005929*scale), (x+32.0850888882569*scale, y+12.7107437668965*scale), (x+22.4290310523822*scale, y+14.7798990174411*scale) ], 2)
+    # call function to draw bushes
+    random1 = random.randint(7, 9)
+    draw_bush(650, 465-(8*random1), random1, random.choice([BUSH1, BUSH2, BUSH3, BUSH4, BUSH5]))
+    random3 = random.randint(7, 9)
+    draw_bush(880, 465-(8*random3), random3, random.choice([BUSH1, BUSH2, BUSH3, BUSH4, BUSH5]))
+    random2 = random.randint(7, 9)
+    draw_bush(760, 465-(8*random2), random2, random.choice([BUSH1, BUSH2, BUSH3, BUSH4, BUSH5]))
+    # left side of screen
+    random4 = random.randint(7, 9)
+    draw_bush(-50, 465-(8*random4), random4, random.choice([BUSH1, BUSH2, BUSH3, BUSH4, BUSH5]))
+    random5 = random.randint(7, 9)
+    draw_bush(30, 465-(8*random5), random5, random.choice([BUSH1, BUSH2, BUSH3, BUSH4, BUSH5]))
 
-draw_moai(random.randint(700, 900), 440, 1, True)
-draw_moai(280, 298, 1.5, False) # put moai behind window
-pygame.draw.line(screen,WHITE, (308, 329), (338, 286), 5) # window shine
-pygame.draw.line(screen,WHITE, (295, 370), (345, 299), 5)
+
+    draw_clouds(random.randint(650, 800), random.randint(40, 100), 2)
+    draw_clouds(random.randint(0,100), random.randint(-30, 100), 2)
+
+    draw_house() # call drawing house function
+
+    draw_egg(random.randint(700, 750), random.randint(550, 650), random.uniform(0.5, 0.8), random.choice([HOTPINK, BLUE, SKYBLUE]))
+    draw_egg(random.randint(766, 820), random.randint(550, 650), random.uniform(0.5, 0.8), random.choice([HOTPINK, BLUE, SKYBLUE]))
+    draw_egg(random.randint(832, 900), random.randint(550, 650), random.uniform(0.5, 0.8), random.choice([HOTPINK, BLUE, SKYBLUE]))
+
+draw_everything()
+
+def water(x, y, scale):
+    color = GREEN
+    pygame.draw.line(screen, color, (x + 5.7704125510555*scale, y + 7.2265192606305*scale), (x + 20*scale, y + 20*scale), 5)
+    pygame.draw.arc(screen, color, (x+18*scale, y+2*scale, 8*scale, 20*scale), math.pi/4, math.pi, 4)
+    pygame.draw.line(screen, color, (x + 28*scale, y + 1*scale), (x + 29*scale, y + 16*scale), 6)
+    pygame.draw.line(screen, color, (x + 36*scale, y + 18*scale), (x + 36*scale, y + 19*scale), 5)
+    pygame.draw.line(screen, color, (x + 36*scale, y + 11 * scale), (x + 37*scale, y + 4*scale), 5)
+    pygame.draw.polygon(screen, color, [(x + 42 * scale, y + 18 * scale), (x + 45 * scale, y + 15 * scale), (x + 52 * scale, y + 9 * scale), (x + 53 * scale, y + 6 * scale), (x + 48 * scale, y + 9 * scale), (x + 45 * scale, y + 12 * scale)], 3)
+    pygame.draw.polygon(screen, color, [(x + 42 * scale, y + 23 * scale), (x + 52 * scale, y + 18 * scale), (x + 49 * scale, y + 18 * scale), (x + 46 * scale, y + 20 * scale)], 3)
+    pygame.draw.arc(screen, color, (x+35*scale, y+25*scale, 20*scale, 5*scale), 3*math.pi/2, math.pi/2, 2)
+    pygame.draw.line(screen, color, (x + 45 * scale, y + 39 * scale), (x + 60 * scale, y + 55 * scale), 5)
+    pygame.draw.line(screen, color, (x + 36 * scale, y + 40 * scale), (x + 43 * scale, y + 51 * scale), 5)
+    pygame.draw.line(screen, color, (x + 30 * scale, y + 43 * scale), (x + 30 * scale, y + 56 * scale), 5)
+    pygame.draw.line(screen, color, (x + 26 * scale, y + 43 * scale), (x + 25 * scale, y + 46 * scale), 2)
+    pygame.draw.polygon(screen, color, [(x + 20 * scale, y + 42 * scale), (x + 11 * scale, y + 53 * scale), (x + 9 * scale, y + 53 * scale), (x + 10 * scale, y + 51 * scale), (x + 19 * scale, y + 42 * scale)], 3)
+    pygame.draw.polygon(screen, color, [(x + 18 * scale, y + 33 * scale), (x + 13 * scale, y + 37 * scale), (x + 19 * scale, y + 35 * scale)], 3)
+    pygame.draw.arc(screen, color, (x+10*scale, y+25*scale, 20*scale, 6*scale), math.pi/2, 3*math.pi/2, 2)
+
+def water_fall(x, y, scale):
+    color = GREEN
+    pygame.draw.line(screen, color, (x + 12*scale, y + 24*scale), (x + 20*scale, y + 20*scale), 10)
+    pygame.draw.arc(screen, color, (x+25*scale, y-10*scale, 10*scale, 20*scale), math.pi/2, 7*math.pi/4, 5)
+    pygame.draw.line(screen, color, (x + 50*scale, y - 10*scale), (x + 54*scale, y + 3*scale), 8)
+    pygame.draw.line(screen, color, (x + 70*scale, y + 10 * scale), (x + 80*scale, y - 8*scale), 7)
+    pygame.draw.line(screen, color, (x + 80*scale, y + 16*scale), (x + 80*scale, y + 18*scale), 7)
+    pygame.draw.polygon(screen, color, [(x + 92 * scale, y + 24 * scale), (x + 96 * scale, y + 20 * scale), (x + 106 * scale, y + 12 * scale), (x + 108 * scale, y + 8 * scale), (x + 102 * scale, y + 14 * scale), (x + 98 * scale, y + 18 * scale)], 3)
+    pygame.draw.polygon(screen, color, [(x + 92 * scale, y + 34 * scale), (x + 108 * scale, y + 25 * scale), (x + 104 * scale, y + 26 * scale), (x + 100 * scale, y + 30 * scale)], 2)
+    pygame.draw.arc(screen, color, (x+100*scale, y+60*scale, 20*scale, 10*scale), 3*math.pi/2, math.pi/4, 2)
+    pygame.draw.line(screen, color, (x + 110 * scale, y + 90 * scale), (x + 120 * scale, y + 110 * scale), 6)
+    pygame.draw.line(screen, color, (x + 79 * scale, y + 100 * scale), (x + 86 * scale, y + 112 * scale), 6)
+    pygame.draw.line(screen, color, (x + 60 * scale, y + 108 * scale), (x + 60 * scale, y + 120 * scale), 6)
+    pygame.draw.line(screen, color, (x + 40 * scale, y + 110 * scale), (x + 42 * scale, y + 120 * scale), 2)
+    pygame.draw.polygon(screen, color, [(x + 30 * scale, y + 94 * scale), (x + 16 * scale, y + 110 * scale), (x + 13 * scale, y + 110 * scale), (x + 15 * scale, y + 107 * scale), (x + 28 * scale, y + 94 * scale)], 3)
+    pygame.draw.polygon(screen, color, [(x + 26 * scale, y + 76 * scale), (x + 19 * scale, y + 82 * scale), (x + 28 * scale, y + 79 * scale)], 3)
+    pygame.draw.arc(screen, color, (x, y+50*scale, 25*scale, 8*scale), math.pi/2, 3*math.pi/2, 2)
 
 # Ending stuff 
 pygame.display.flip()
 running = True
+hank_ran = True
 while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
-        elif event.type == pygame.MOUSEBUTTONUP:
+        elif event.type == pygame.MOUSEBUTTONUP and hank_ran:
             hank(230, 570, 1)
             pygame.display.flip()
             # draw a bubble getting progressively bigger
-            time.sleep(1)
+            time.sleep(0.8)
             pygame.draw.circle(screen, SKYBLUE, (220, 648), 25)
             pygame.display.flip()
             
             # draw a bigger circle
-            time.sleep(1)
+            time.sleep(0.8)
             pygame.draw.circle(screen, SKYBLUE, (190, 648), 50)
             pygame.display.flip()
 
             # draw a even bigger circle
-            time.sleep(1)
+            time.sleep(0.8)
             pygame.draw.circle(screen, SKYBLUE, (130, 648), 100)
             pygame.display.flip()
             
-            # wait another second, then remove all bubbles
-            time.sleep(1)
-            # redraw house
-            # Redraw Hank to ensure he's still visible
+            time.sleep(0.5)
+            water(70, 600, 1.5)
+            pygame.display.flip()
+            time.sleep(0.8)
+            water_fall(40, 570, 1.5)
+            pygame.display.flip()
+            time.sleep(0.3)
+
+            # then remove all bubbles by redrawing everything
+            draw_everything()
+            # time.sleep(1)
             hank(230, 570, 1)
             pygame.display.flip()
+            hank_ran = False
 pygame.quit()
