@@ -6,9 +6,9 @@
 import math
 
 # define the fixed circle
-circle_x = 10
-circle_y = 10
-circle_radius = 20
+circle_x = -2
+circle_y = -2
+circle_radius = 2
 
 point_coord = input("Enter the x, y, and radius of the circle ((x,y) radius): ")
 
@@ -24,13 +24,13 @@ if cleaned_point.count(" ") == 2:
     user_y = cleaned_point[cleaned_point.find(" ")+1:][:cleaned_point[cleaned_point.find(" ")+1:].find(" ")].replace(" ", "")
     radius = cleaned_point[cleaned_point.find(" ")+1:][cleaned_point[cleaned_point.find(" ")+1:].find(" "):].replace(" ", "")
     
-    if user_x.isdigit() == False or user_y.isdigit() == False or radius.isdigit() == False:
+    print(user_x)
+    print(user_y)
+    print(radius)
+    if user_x.isalpha() == True or user_y.isalpha() == True or radius.isalpha() == True:
         print("Invalid input - not a number")
     
     else:
-        print(user_x)
-        print(user_y)
-        print(radius)
 
         circle_touching = ""
 
