@@ -26,8 +26,11 @@ else:
     # first num
     user_x = all_space[:all_space.find(" ")] # from the start to the first space
     new_points = all_space[all_space.find(all_space[all_space.find(" ") + 1:].replace(" ", "")[0]):] # from the first space to the end (everything excluding first num)
-    if new_points.count(" ") < 2:
+    print("a" + new_points)
+    if new_points.count(" ") < 1:
         print("Invalid input - not enough points")
+    elif all_space.replace(" ", "").isdigit() == False:
+        print("Invalid input - not a number")
     else:
         # second num
         user_y = new_points[:new_points.find(" ")]
