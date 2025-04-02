@@ -1,7 +1,7 @@
 # Name: Eddie Bian
-# Date: March 26, 2025
+# Date: April 2, 2025
 # Course Code: ICS3U1
-# Description: collision chcker
+# Description: collision chcker circle
 
 import math
 
@@ -10,11 +10,9 @@ fixed_circle_x = 0
 fixed_circle_y = 0
 fixed_circle_radius = 10
 
-
 # function to split string, using recursion
 def split(string, split_by, split_string):
-    # This function splits a string based on a given character and returns the split string    
-
+    # This function splits a string based on a given character and returns the split string
 
     # check if the first index is a space
     if string.find(split_by) == 0:
@@ -34,35 +32,46 @@ def split(string, split_by, split_string):
         split_string += string[0:string.find(split_by)]
         return split(string[string.find(split_by) + 1:], split_by, split_string)
 
+# function to check if user input is correct
+def check_for_errors(string, character, name, stuff_missing, first_index, last_index):
+    # this function checks if the user input is valid and adds errors if there are any
+
+    string_split = string[first_index:last_index]
+    if string.count(character) > 1:
+        stuff_missing += "\n - too many %ss" % name
+    elif string.count(character) == 0:
+        stuff_missing += "\n - missing %s" % name
+    elif string_split.count(character) != string.count(character):
+        stuff_missing += "\n - %s at wrong place" % name
+    
+    return stuff_missing
+   
 # get values from user and print where the fixed circle is
 print("The fixed circle is at (%s, %s) and the radius is %s" % (fixed_circle_x, fixed_circle_y, fixed_circle_radius) )
-point_coord = input("Enter the x, y, and radius of the circle in the format: (x,y) radius: ")
+user_input = input("Enter the x, y, and radius of the circle in the format: (x,y) radius: ")
 
-stuff_missing = "This is the stuff you're not following:\n"
-
-# check the user input if it matches the format
-if split(point_coord, "(", "").count(" ") > 1:
-    stuff_missing += "too many left brackets"
-elif split(point_coord, "(", "").count(" ") == 0:
-    stuff_missing += "missing left bracket\n"
-
-
-# Clean the user input - this is the this receives all the 
+# Clean the user input
 # replace everything except the numbers with spaces
-removed_all_spaces = point_coord.replace('(', " ").replace(")", " ").replace(",", " ").replace(" ", " ")
+removed_all_spaces = user_input.replace('(', " ").replace(")", " ").replace(",", " ").replace(" ", " ")
 
 # removes all spaces from the start and end of string (trailing and leading spaces)
 removed_all_spaces = removed_all_spaces[removed_all_spaces.find(removed_all_spaces.replace(" ", "")[0]):len(removed_all_spaces) - removed_all_spaces[::-1].find(removed_all_spaces[-1])]
 
-# call the split function on the user string and remove the first space created from the function
-cleaned_points = split(removed_all_spaces, " ", "")[1:] 
+# call the split function on the user string & remove the first space that the function creates
+cleaned_points = split(removed_all_spaces, " ", "")[1:]
+
 # check if user input is valid & do the calculations
 if cleaned_points.count(" ") == 2:
     # separate the user input into 3 variables
     user_x = cleaned_points[0:cleaned_points.find(" ")]
     user_y = cleaned_points[cleaned_points.find(" ") + 1:cleaned_points.find(" ", cleaned_points.find(" ") + 1)]
     radius = cleaned_points[cleaned_points.find(" ", cleaned_points.find(" ") + 1) + 1:len(cleaned_points)]
-    
+
+    # get the index numbers of each input
+    user_x_index = user_input.find(user_x)
+    user_y_index = user_input[user_x_index + len(user_x):].find(user_y) + user_x_index + len(user_x)
+    radius_index = user_input[user_y_index + len(user_y):].find(radius) + user_y_index + len(user_y)
+
     # check if all the numbers are digits
     if user_x.replace("-", "").isdigit() == True and user_y.replace("-", "").isdigit() == True and radius.isdigit() == True:
         # check if the radius is 0
@@ -75,8 +84,26 @@ if cleaned_points.count(" ") == 2:
         elif user_x.count("-") == 1 and user_x[0] != "-" or user_y.count("-") == 1 and user_y[0] != "-": # if the x or y value has a dash in the wrong place
             print("dashes in the wrong place")
         else:
+            # Check the user input if it matches the format
+            # call the checking error function for all the characters
+            stuff_missing = check_for_errors(user_input, "(", "left bracket", "These are the errors in your formatting:", 0, user_x_index)
+            stuff_missing = check_for_errors(user_input, ")", "right bracket", stuff_missing, user_y_index, radius_index)
+            stuff_missing = check_for_errors(user_input, ",", "comma", stuff_missing, user_x_index, user_y_index)
+            stuff_missing = check_for_errors(user_input, " ", "space", stuff_missing, user_y_index, radius_index)
+
+            # print the errors if there are any
+            if stuff_missing.count("\n") > 0:
+                print("-------------------")
+                print(stuff_missing)
+                print("-------------------")
+                print("But I can still use the inputs :D\n")
+
+            # when the input is fine
             print("Your circle is at (%s, %s) and the radius is %s" % (user_x, user_y, radius))
-            circle_touching = "" # variable for the output of the program
+            
+            # variable for the output of the program
+            circle_touching = "" 
+            
             # cast the variables into integers
             user_y = int(user_y)
             radius = int(radius)
@@ -89,8 +116,9 @@ if cleaned_points.count(" ") == 2:
             # check x and y values if point is inside circle
             if user_x > fixed_circle_x - fixed_circle_radius and user_x < fixed_circle_x + fixed_circle_radius and user_y > fixed_circle_y - fixed_circle_radius and user_y < fixed_circle_y + fixed_circle_radius:
                 print("Center point is inside the circle")
-                # check how the circle is inside the fixed circle 
-                if fixed_circle_radius == radius and user_x == fixed_circle_x and user_y == fixed_circle_y:
+
+                # check how the circle is inside the fixed circle
+                if fixed_circle_radius == radius and user_x == fixed_circle_x and user_y == fixed_circle_y and radius != 0:
                     circle_touching = "Circles are the same"
                 elif distance < abs(fixed_circle_radius - radius) and user_x + radius < fixed_circle_x + fixed_circle_radius and user_y + radius < fixed_circle_y + fixed_circle_radius:
                     circle_touching = "Circle is inside the other circle, but not touching"
@@ -99,7 +127,7 @@ if cleaned_points.count(" ") == 2:
                 elif distance + radius == fixed_circle_radius:
                     circle_touching = "Circle is touching the inside of the fixed circle at one point"
 
-            # check where the point
+            # check where the point is relative to the fixed circle
             elif (user_x - fixed_circle_x)**2 + (user_y - fixed_circle_y)**2 == fixed_circle_radius**2:
                 print("Center point is on the circle")
             else: # if the point isn't on the circle or inside the circle, it is outside the circle
@@ -114,13 +142,12 @@ if cleaned_points.count(" ") == 2:
                 if circle_touching == "":
                     circle_touching = "Circles are not touching"
             
-            # print how to circles are touching
+            # print how circles are touching
             print(circle_touching)
+    elif radius.replace("-", "").isdigit() == True:  # if the radius has a dash in it
+        print("radius can't be negative")
     else:
-        if radius.isdigit() != True and radius.replace("-", "").isdigit() == True: # if the radius has a dash in it
-            print("radius can't be negative")
-        else:
-            print("containing non-numeric characters")
+        print("containing non-numeric characters")
 elif cleaned_points.count(" ") > 2:
     print("too many points")
 else:
