@@ -6,13 +6,9 @@
 import math
 
 # define the fixed circle
-circle_x = 0
-circle_y = 0
-circle_radius = 10
-
-# the beginning of the program - get values from user and print where the fixed circle is
-print("The fixed circle is at (%s, %s) and the radius is %s" % (circle_x, circle_y, circle_radius) )
-point_coord = input("Enter the x, y, and radius of the circle ((x,y) radius): ")
+fixed_circle_x = 0
+fixed_circle_y = 0
+fixed_circle_radius = 10
 
 
 # function to split string, using recursion
@@ -38,7 +34,20 @@ def split(string, split_by, split_string):
         split_string += string[0:string.find(split_by)]
         return split(string[string.find(split_by) + 1:], split_by, split_string)
 
-# Clean the user input
+# get values from user and print where the fixed circle is
+print("The fixed circle is at (%s, %s) and the radius is %s" % (fixed_circle_x, fixed_circle_y, fixed_circle_radius) )
+point_coord = input("Enter the x, y, and radius of the circle in the format: (x,y) radius: ")
+
+stuff_missing = "This is the stuff you're not following:\n"
+
+# check the user input if it matches the format
+if split(point_coord, "(", "").count(" ") > 1:
+    stuff_missing += "too many left brackets"
+elif split(point_coord, "(", "").count(" ") == 0:
+    stuff_missing += "missing left bracket\n"
+
+
+# Clean the user input - this is the this receives all the 
 # replace everything except the numbers with spaces
 removed_all_spaces = point_coord.replace('(', " ").replace(")", " ").replace(",", " ").replace(" ", " ")
 
@@ -47,21 +56,26 @@ removed_all_spaces = removed_all_spaces[removed_all_spaces.find(removed_all_spac
 
 # call the split function on the user string and remove the first space created from the function
 cleaned_points = split(removed_all_spaces, " ", "")[1:] 
-
 # check if user input is valid & do the calculations
 if cleaned_points.count(" ") == 2:
     # separate the user input into 3 variables
     user_x = cleaned_points[0:cleaned_points.find(" ")]
     user_y = cleaned_points[cleaned_points.find(" ") + 1:cleaned_points.find(" ", cleaned_points.find(" ") + 1)]
     radius = cleaned_points[cleaned_points.find(" ", cleaned_points.find(" ") + 1) + 1:len(cleaned_points)]
-
+    
     # check if all the numbers are digits
     if user_x.replace("-", "").isdigit() == True and user_y.replace("-", "").isdigit() == True and radius.isdigit() == True:
         # check if the radius is 0
         if radius == "0":
             print("Radius is 0 - circle aint a circle")
 
+        # check if the dashes are in the right place
+        if user_x.count("-") > 1 or user_y.count("-") > 1: # if the x or y value has more than one dash
+            print("too many dashes in x or y values")
+        elif user_x.count("-") == 1 and user_x[0] != "-" or user_y.count("-") == 1 and user_y[0] != "-": # if the x or y value has a dash in the wrong place
+            print("dashes in the wrong place")
         else:
+            print("Your circle is at (%s, %s) and the radius is %s" % (user_x, user_y, radius))
             circle_touching = "" # variable for the output of the program
             # cast the variables into integers
             user_y = int(user_y)
@@ -69,32 +83,32 @@ if cleaned_points.count(" ") == 2:
             user_x = int(user_x)
 
             # Calculate distance between two center points of user and fixed circle
-            distance = math.sqrt((user_x - circle_x)**2 + (int(user_y) - circle_y)**2)
+            distance = math.sqrt((user_x - fixed_circle_x)**2 + (int(user_y) - fixed_circle_y)**2)
 
             # Calculate where the user point is relative to the circle
             # check x and y values if point is inside circle
-            if user_x > circle_x - circle_radius and user_x < circle_x + circle_radius and user_y > circle_y - circle_radius and user_y < circle_y + circle_radius:
+            if user_x > fixed_circle_x - fixed_circle_radius and user_x < fixed_circle_x + fixed_circle_radius and user_y > fixed_circle_y - fixed_circle_radius and user_y < fixed_circle_y + fixed_circle_radius:
                 print("Center point is inside the circle")
                 # check how the circle is inside the fixed circle 
-                if circle_radius == radius and user_x == circle_x and user_y == circle_y:
+                if fixed_circle_radius == radius and user_x == fixed_circle_x and user_y == fixed_circle_y:
                     circle_touching = "Circles are the same"
-                elif distance < abs(circle_radius - radius) and user_x + radius < circle_x + circle_radius and user_y + radius < circle_y + circle_radius:
+                elif distance < abs(fixed_circle_radius - radius) and user_x + radius < fixed_circle_x + fixed_circle_radius and user_y + radius < fixed_circle_y + fixed_circle_radius:
                     circle_touching = "Circle is inside the other circle, but not touching"
-                elif distance < abs(circle_radius - radius) and user_x + radius > circle_x + circle_radius and user_y + radius > circle_y + circle_radius:
+                elif distance < abs(fixed_circle_radius - radius) and user_x + radius > fixed_circle_x + fixed_circle_radius and user_y + radius > fixed_circle_y + fixed_circle_radius:
                     circle_touching = "Circle is outside the other circle, but not touching"
-                elif distance + radius == circle_radius:
+                elif distance + radius == fixed_circle_radius:
                     circle_touching = "Circle is touching the inside of the fixed circle at one point"
 
             # check where the point
-            elif (user_x - circle_x)**2 + (user_y - circle_y)**2 == circle_radius**2:
+            elif (user_x - fixed_circle_x)**2 + (user_y - fixed_circle_y)**2 == fixed_circle_radius**2:
                 print("Center point is on the circle")
             else: # if the point isn't on the circle or inside the circle, it is outside the circle
                 print("Center point is outside the circle")
 
             # check if the circles are touching
-            if distance == circle_radius + radius: # circles touching only once
+            if distance == fixed_circle_radius + radius: # circles touching only once
                 circle_touching = "Circles are touching at one point"
-            elif distance < circle_radius + radius and distance > abs(circle_radius - radius): # circles touching at two points
+            elif distance < fixed_circle_radius + radius and distance > abs(fixed_circle_radius - radius): # circles touching at two points
                 circle_touching = "Circles are overlapping"
             else: # if the cicles aren't touching anywhere, the circles aren't touching at all
                 if circle_touching == "":
@@ -104,10 +118,10 @@ if cleaned_points.count(" ") == 2:
             print(circle_touching)
     else:
         if radius.isdigit() != True and radius.replace("-", "").isdigit() == True: # if the radius has a dash in it
-            print("Invalid input - radius can't be negative")
+            print("radius can't be negative")
         else:
-            print("Invalid input - containing non-numeric characters")
+            print("containing non-numeric characters")
 elif cleaned_points.count(" ") > 2:
-    print("Invalid input - too many points")
+    print("too many points")
 else:
-    print("Invalid input - not enough points")
+    print("not enough points")

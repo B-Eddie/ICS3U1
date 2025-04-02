@@ -6,7 +6,6 @@
 import pygame
 import math
 import random
-import time
 
 pygame.init() # Initialize pygame
 
@@ -552,28 +551,28 @@ while running:
             hank(230, 570, 1) # draws hank
             pygame.display.flip() # updates the screen so hank shows
             # draw a bubble getting progressively bigger
-            time.sleep(0.8)
+            pygame.time.wait(800)
             pygame.draw.circle(screen, SKYBLUE, (220, 648), 25)
             pygame.display.flip()
             
             # draw a bigger circle
-            time.sleep(0.8)
+            pygame.time.wait(800)
             pygame.draw.circle(screen, SKYBLUE, (190, 648), 50)
             pygame.display.flip()
 
             # draw a even bigger circle
-            time.sleep(0.8)
+            pygame.time.wait(800)
             pygame.draw.circle(screen, SKYBLUE, (130, 648), 100)
             pygame.display.flip()
 
             # draw water popping animation            
-            time.sleep(0.5)
+            pygame.time.wait(500)
             water(70, 600, 1.5)
             pygame.display.flip()
-            time.sleep(0.8)
+            pygame.time.wait(800)
             water_fall(40, 570, 1.5)
             pygame.display.flip()
-            time.sleep(0.3)
+            pygame.time.wait(300)
 
             # remove all bubbles by redrawing everything
             draw_everything()
