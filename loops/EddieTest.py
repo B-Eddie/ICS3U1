@@ -4,7 +4,9 @@ string = ""
 for i in range(random.randint(5, 10)):
     string += str(random.randint(0, 9))
 
-newstring = string[::-1]
+newstring = ""
+for i in range(len(string), 0, -1):
+    newstring += string[i-1]
 
 finalstring = ""
 for i in range(0, len(string)):
