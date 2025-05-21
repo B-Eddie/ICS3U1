@@ -1,7 +1,12 @@
+# Name: Eddie Bian
+# Date: May 7, 2025
+# Course Code: ICS3U1
+# Description: Mystery Message Decoder - 4+ pygame version
+
 import pygame
+import random
 
 pygame.init() # Initialize pygame
-import random
 
 # setup the file
 file_handle = open("A3P5file.txt", "w")
@@ -23,10 +28,10 @@ shift_key = ""
 # init pygame variables
 BLACK = (0, 0, 0)
 WHITE = (255, 255, 255)
+LIGHT_GRAY = (211, 211, 211)
 BLUE = (173, 216, 230)
 BROWN = (255, 224, 189)
 DARK_BROWN = (139, 69, 19)
-
 screen.fill(BLUE)
 
 # 3 brown backgrounds
@@ -35,36 +40,36 @@ pygame.draw.rect(screen, BROWN, (340, 20, 640, 240)) # input
 pygame.draw.rect(screen, BROWN, (340, 280, 640, 400)) # output
 
 # draw 3 white backgrounds
-pygame.draw.rect(screen, WHITE, (30, 120, 280, 550)) # file
+pygame.draw.rect(screen, LIGHT_GRAY, (30, 120, 280, 550)) # file
 pygame.draw.rect(screen, BLACK, (30, 120, 280, 550), 1) # border
 # input
-pygame.draw.rect(screen, WHITE, (360, 340, 600, 330)) # output
-pygame.draw.rect(screen, BLACK, (360, 340, 600, 330), 1) # border
+pygame.draw.rect(screen, LIGHT_GRAY, (360, 340, 600, 330)) # output
+pygame.draw.rect(screen, BLACK, (360, 340, 600, 330), 1) # output border
 
 # show the texts
-file_text = large_font.render("File", 1, DARK_BROWN)
-input_text = large_font.render("Input", 1, DARK_BROWN)
-output_text = large_font.render("Output", 1, DARK_BROWN)
-screen.blit(file_text, (140, 50))
-screen.blit(input_text, (610, 50))
-screen.blit(output_text, (620, 300))
+file_text = large_font.render("File", 1, DARK_BROWN) # file text
+input_text = large_font.render("Input", 1, DARK_BROWN) # input text
+output_text = large_font.render("Output", 1, DARK_BROWN) # output text
+screen.blit(file_text, (140, 50)) # blit the file text
+screen.blit(input_text, (610, 50)) # blit the input text
+screen.blit(output_text, (620, 300)) # blit the output text
 
 def display_text(shift_key):
     # display everything in the file
-    second_line_file = open("A3P5file.txt", "r")
-    append_file = open("A3P5file.txt", "a")
+    second_line_file = open("A3P5file.txt", "r") # open the file in read mode
+    append_file = open("A3P5file.txt", "a") # open the file in append mode
 
-    lines = second_line_file.readlines()
+    lines = second_line_file.readlines() # get all lines of the file
 
     # encrypt second line
     second_line = lines[1] # get the second line
     
-    alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-    alphabet_lower = alphabet.lower()
+    alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" # alphabet
+    alphabet_lower = alphabet.lower() # lowercase alphabet
     newalphabet = alphabet[int(shift_key):] + alphabet[:int(shift_key)] # move the alphabet by the shift key
     newalphabet_lower = alphabet_lower[int(shift_key):] + alphabet_lower[:int(shift_key)] # move the lowercase alphabet by the shift key
 
-    encrypted = ""
+    encrypted = "" # variable to store the encrypted string
     for i in range(len(second_line)):
         index = alphabet.find(second_line[i]) # find the index of the character in the alphabet
         if index != -1:
@@ -94,13 +99,14 @@ def display_text(shift_key):
         for line in lines:
             line = line.rstrip("\n")  # remove extra \n on the right of the line
             if line:  # only render non-empty lines
-                header_text = small_font.render(words[counter], 1, DARK_BROWN)
-                file_line_text = small_font.render(str(line.split()), 1, DARK_BROWN)
-                screen.blit(header_text, (50, y_position))
-                screen.blit(file_line_text, (50, y_position + 25))
+                header_text = small_font.render(words[counter], 1, DARK_BROWN) # header text
+                file_line_text = small_font.render(str(line.split()), 1, DARK_BROWN) # file line text
+                screen.blit(header_text, (50, y_position)) # blit the header text
+                screen.blit(file_line_text, (50, y_position + 25)) # blit the file line text
                 y_position += 100  # move down 50 each line
             counter += 1
     else:
+        # if there is no shift key, display "Add a shift key"
         file_line_text = small_font.render("Add a shift key", 1, DARK_BROWN)
         screen.blit(file_line_text, (50, 550))
 
@@ -109,6 +115,8 @@ def display_text(shift_key):
 # shift key
 shift_key_text = medium_font.render("Shift Key:", 1, BLACK)
 screen.blit(shift_key_text, (380, 180))
+description_text = small_font.render("Press text box, enter a shift key, press enter", 1, BLACK)
+screen.blit(description_text, (480, 230))
 pygame.draw.rect(screen, WHITE, (500, 170, 100, 50)) # white input
 pygame.draw.rect(screen, BLACK, (500, 170, 100, 50), 1) # border
 
@@ -121,6 +129,7 @@ pygame.draw.rect(screen, BLACK, (500, 100, 400, 50), 1) # border
 shuffled_hints = []
 shuffled_message = []
 shuffled_encrypted = []
+
 def shuffle_lists():
     global shuffled_hints, shuffled_message, shuffled_encrypted
     # shuffle the lists, using the same index for each list so that the hints match the words
@@ -130,43 +139,50 @@ def shuffle_lists():
     message = lines[1].split() # second line
     encrypted = lines[2].split() # third line
 
+    # temp lists to store the original lists
     temp_hints = hints
     temp_message = message
     temp_encrypted = encrypted
 
+    # new lists to store the shuffled lists
     shuffled_hints = []
     shuffled_message = []
     shuffled_encrypted = []
 
     # shuffle all the lists with the same index
     for count in range(len(hints)):
+        # get a random index and remove the element from the original list, add to the new list
         random_index = random.randint(0, len(hints) - 1)
         shuffled_hints.append(temp_hints.pop(random_index))
         shuffled_message.append(temp_message.pop(random_index))
         shuffled_encrypted.append(temp_encrypted.pop(random_index))
+    
+    # close the file
+    open_file.close()
 
 def show_output(input):
-    print(shuffled_hints, shuffled_message, shuffled_encrypted)
+    # print(shuffled_hints, shuffled_message, shuffled_encrypted) # debugging
 
     # clean the output area
-    pygame.draw.rect(screen, WHITE, (360, 340, 600, 330)) # white input
+    pygame.draw.rect(screen, LIGHT_GRAY, (360, 340, 600, 330)) # light gray input
     pygame.draw.rect(screen, BLACK, (360, 340, 600, 330), 1) # border
 
     if input != "none":
         # show encrypted message and hint, compare it with the input to see if it is correct
         if input.lower() == shuffled_message[0].lower():
             # clean the output area
-            pygame.draw.rect(screen, WHITE, (360, 340, 600, 330)) # white input
+            pygame.draw.rect(screen, LIGHT_GRAY, (360, 340, 600, 330)) # white input
             pygame.draw.rect(screen, BLACK, (360, 340, 600, 330), 1) # border
 
             # Remove the first element from the lists
             shuffled_hints.pop(0)
             shuffled_message.pop(0)
             shuffled_encrypted.pop(0)
-            print(shuffled_hints, shuffled_message, shuffled_encrypted)
+            # print(shuffled_hints, shuffled_message, shuffled_encrypted) # debugging
+
             # check if there are no more elements in the list
             if len(shuffled_hints) == 0:
-                # if game win
+                # if game win, display "You win!"
                 congrats_text = small_font.render("You win!", 1, DARK_BROWN)
                 screen.blit(congrats_text, (400, 380))
                 pygame.display.flip()
@@ -183,7 +199,7 @@ def show_output(input):
         else:
             # if the input is wrong
             # clean the output area
-            pygame.draw.rect(screen, WHITE, (360, 340, 600, 330))
+            pygame.draw.rect(screen, LIGHT_GRAY, (360, 340, 600, 330))
             pygame.draw.rect(screen, BLACK, (360, 340, 600, 330), 1) # border
             # display "incorrect" message
             incorrect_text = small_font.render("Incorrect! Try again:", 1, DARK_BROWN)
@@ -219,20 +235,21 @@ while running:
             if 500 <= pygame.mouse.get_pos()[0] <= 600 and 170 <= pygame.mouse.get_pos()[1] <= 220: # clicked on the shift key input
                 shift_clicked = True
                 input_clicked = False
-        if event.type == pygame.MOUSEBUTTONDOWN:
+
             if 500 <= pygame.mouse.get_pos()[0] <= 900 and 100 <= pygame.mouse.get_pos()[1] <= 150: # clicked on the input area
                 input_clicked = True
                 shift_clicked = False
+
         if event.type == pygame.KEYDOWN:
             if shift_clicked:
                 if event.key == pygame.K_RETURN: # submit shift key
                     if shift_key:
-                        print(shift_key)
+                        # print(shift_key) # debugging
                         display_text(shift_key)
                         show_output("none")
                         pygame.display.flip()
                 elif event.key == pygame.K_BACKSPACE: # backspace
-                    shift_key = shift_key[:-1]
+                    shift_key = shift_key[:-1] # remove the last character
                 else:
                     # add numbers to shift key
                     if len(shift_key) < 2:
@@ -252,15 +269,16 @@ while running:
             if input_clicked:
                 if event.key == pygame.K_RETURN:
                     if user_input:
-                        print(user_input)
+                        # print(user_input) # debugging
                         show_output(user_input)
                         
                         user_input = "" # clear user input
 
                         pygame.display.flip()
                 elif event.key == pygame.K_BACKSPACE:
-                    user_input = user_input[:-1]
+                    user_input = user_input[:-1] # remove the last character
                 else:
+                    # add characters to user input
                     if len(user_input) < 20:
                         key = event.unicode
                         user_input += key

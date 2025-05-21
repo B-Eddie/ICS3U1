@@ -8,11 +8,19 @@ import random
 # initialize inputs
 message = input("Enter a 5 word message: ")
 hints = input("Enter a 5 word hint list: ")
-shift = int(input("Enter shift value: "))
+shift = input("Enter shift value: ")
 
-if message.split() != 5 and hints.split() != 5:
-    print("\nits suppose to be 5 words")
+if len(message.split()) != 5 or len(hints.split()) != 5: # check if the message and hint list are 5 words
+    print("\nError, message and hint list must be 5 words")
+elif not message.replace(" ", "").isalpha() or not hints.replace(" ", "").isalpha(): # check if the message and hint list are alphabetic
+    print("\nError, message and hint list must be alphabetic")
+elif not shift.isdigit(): # check if the shift value is a number
+    print("\nError, shift value must be a number")
+elif not 0 <= int(shift) <= 25: # check if the shift value is between 0 and 25
+    print("\nError, shift value must be between 0 and 25")
 else:
+    shift = int(shift) # cast shift to an integer
+
     # two alphabets, one for uppercase and one for lowercase
     alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
     alphabet_lower = alphabet.lower()
@@ -56,6 +64,7 @@ else:
                 wordlist.append(eachword)
             for eachhint in newhintlist:
                 hintlist.append(eachhint)
+
             newwordlist = []
             newhintlist = []
 
@@ -81,6 +90,9 @@ else:
     # start the game loop
     game = True
     num = 0
+    print("Original:", newwordlist)
+    print("Encrypted:", encrypted)
+    print("Hint list:", newhintlist)
     while game:
         # print("New word list:", encrypted)
         # print("New other word list:", newhintlist)
@@ -103,5 +115,8 @@ else:
             # if the guess is incorrect, reshuffle the lists
             print("Incorrect! Reshuffling... Try again.\n")
             shufflelists()
+            print("Original:", newwordlist)
+            print("Encrypted:", encrypted)
+            print("hint list:", newhintlist)
             # encrypted = encrypted.split()
             num = 0
