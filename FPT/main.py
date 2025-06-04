@@ -17,10 +17,18 @@ BROWN = (139, 69, 19)
 GRAY = (128, 128, 128)
 GRAYBLUE = (83, 104, 114)
 RED = (255, 0, 0)
+GOLD = (255, 215, 0)
 
 # music
-# fireSound = mixer.Sound("assets/sfx/flute.wav") #! remove comments to unmute
-# fireSound.play(loops=-1)
+fireSound = mixer.Sound("assets/sfx/flute.wav") #! remove comments to unmute
+fireSound.play(loops=-1)
+
+fart1 = mixer.Sound("assets/sfx/fart/1.wav")
+fart2 = mixer.Sound("assets/sfx/fart/2.wav")
+fart3 = mixer.Sound("assets/sfx/fart/3.wav")
+
+pickup = mixer.Sound("assets/sfx/fart/pickup.wav")
+damage = mixer.Sound("assets/sfx/die.wav")
 
 # Fonts
 neue_font = font.Font("assets/fonts/neuebit-regular.otf", 40)
@@ -38,12 +46,25 @@ currentState = MENU
 score = 0
 game_state = MENU
 clock = time.Clock()
+score = 0
+hearts = 3
+mx, my = 0, 0
+running = True
+immunity = False
+immunity_check = 0
+boosts = []
+max_poops = 10
 
 # geese parts
 poop_location = ""
 geese_location = ""
 goose_speed = 2
 poop_chance = 0.01
+
+# images
+grass_background = image.load("assets/images/grass.png") # background image
+heart = image.load("assets/images/heart.png")
+background = image.load("assets/background.png")
 
 player_x = width/2 - 50
 player_y = height/2 - 50
@@ -57,7 +78,6 @@ player_movement = [False, False, False, False]
 screen = display.set_mode((width, height))
 display.set_caption("Geese S.H.E.E.T")
 
-background = image.load("assets/background.png")
 
 def drawMenu(screen, mx, my, button, currentState):
     screen.fill(GRAY)
@@ -119,21 +139,45 @@ def drawPoop(screen, x, y, poop_image):
 # function to remove poop from the screen + poop_location variable
 def removePoop(x, y):
     global poop_location
-    print(x, y)
     poop_location = poop_location.replace(str(x) + "," + str(y) + ",1", "") # try 3 times for different poop images
     poop_location = poop_location.replace(str(x) + "," + str(y) + ",2", "")
     poop_location = poop_location.replace(str(x) + "," + str(y) + ",3", "")
 
+def drawBooster(screen):
+    global boosts
+    if boosts:
+        boost = boosts[-1]
+        color = ""
+        # have different colors for different boosters
+        if boost == "Immunity":
+            color = GOLD
+        elif boost == "Speed":
+            color = GREEN
+
+        text = neue_font_bold.render(str(boost), True, color)
+        screen.blit(text, (width/2 - text.get_width()/2, 50))
+
 def drawGame(screen):
-    global player_x, player_y, player_rect, poop_location, geese_location
+    global player_x, player_y, player_rect, poop_location, geese_location, score, hearts, currentState, running, player_x, player_y, immunity, immunity_check
+
 
     current_time = time.get_ticks() # time
 
     # create collision for player
     player_rect = Rect(player_x + 15, player_y + 5, 70, 80)
 
-    background = image.load("assets/images/grass.png") # background image
-    screen.blit(background, (0, 0)) # draw background
+    screen.blit(grass_background, (0, 0)) # draw background
+
+    if immunity_check != 0:
+        immunity_check -= 1
+        draw.circle(screen, GOLD, (player_x + 50, player_y + 45), 50, 5)
+        drawBooster(screen)
+        if "Immunity" not in boosts:
+            boosts.append("Immunity")
+        if immunity_check == 0:
+            immunity = False
+            boosts.remove("Immunity")
+
 
     player_image = image.load("assets/images/character/1.png") # player image
     current_time = time.get_ticks() # get the current time
@@ -172,15 +216,22 @@ def drawGame(screen):
     # geese move randomly and poop sometimes spawns. unless the goose is 50px away from the player, then they get angry and move towards the player
     if geese_location == "":
         # initial geese spawn
-        for i in range(random.randint(1, 5)): # number of geese spawning increase with difficulty
-            random_x = random.randrange(100, 900, 10)
-            random_y = random.randrange(100, 600, 10)
+        for i in range(random.randint(1, 3)): # number of geese spawning increase with difficulty
+            if random.random() < 0.5:
+                random_x = random.randint(100, 400)
+            else:
+                random_x = random.randint(700, 900)
+            if random.random() < 0.5:
+                random_y = random.randint(100, 300)
+            else:
+                random_y = random.randint(500, 600)
+
             geese_location += str(random_x) + "," + str(random_y) + ",1," + str(random.randrange(random_x - 50, random_x + 50, 10)) + "," + str(random.randrange(random_y - 50, random_y + 50, 10)) + ",0:" # x,y,goose_img,aim_x,aim_y,was_in_proximity:
     else:
         # update geese location
-        for i in geese_location.split(":"):
-            if i != "":
-                vals = i.split(",")
+        for value in geese_location.split(":"):
+            if value != "":
+                vals = value.split(",")
                 # x,y,goose_img,aim_x,aim_y,was_in_proximity:
 
                 if int(vals[0]) == int(vals[3]) and int(vals[1]) == int(vals[4]): # if the target is reached
@@ -223,11 +274,30 @@ def drawGame(screen):
                         vals[3] = str(int(vals[0]) + random.randrange(-50, 50, 10))
                         vals[4] = str(int(vals[1]) + random.randrange(-50, 50, 10))
                         vals[5] = "0"  # set proximity to not touching player
+                
+                # geese collision with player - losing hearts
+                geese_rect_player = Rect(int(vals[0]) + 20, int(vals[1]) + 20, 70, 75)
+                draw.rect(screen, RED, geese_rect_player, 1)
+                if player_rect.colliderect(geese_rect_player) and not immunity:
+                    damage.play()
+                    hearts -= 1
+                    player_x, player_y = 0, 0
+                    if hearts == 0:
+                        currentState = GAME_OVER
+                    immunity = True
+                    immunity_check = 200
 
                 # goose randomly dropping poop
                 # poop_chance
                 if random.random() < poop_chance:
-                    poop_location += str(int(vals[0])) + "," + str(int(vals[1])) + "," + str(random.randint(1, 3)) + ":"
+                    random_fart = random.randint(1, 3)
+                    if random_fart == 1:
+                        fart1.play()
+                    elif random_fart == 2:
+                        fart2.play()
+                    else:
+                        fart3.play()
+                    poop_location += str(int(vals[0])) + "," + str(int(vals[1])) + "," + str(random_fart) + ":"
 
 
                 # geese animation
@@ -237,16 +307,18 @@ def drawGame(screen):
                     vals[2] = 2
 
                 new_location = str(vals[0]) + "," + str(vals[1]) + "," + str(vals[2]) + "," + str(vals[3]) + "," + str(vals[4]) + "," + str(vals[5])
-                geese_location = geese_location.replace(i, new_location)
+                geese_location = geese_location.replace(value, new_location)
 
     # check poop collision
     if poop_location:
-        for i in poop_location.split(":"):
-            if i != "":
-                coord = i.split(",")
+        for value in poop_location.split(":"):
+            if value != "":
+                coord = value.split(",")
                 poop_rect = Rect(int(coord[0]) + 20, int(coord[1]) + 55, 65, 45)
                 if player_rect.colliderect(poop_rect):
+                    pickup.play()
                     removePoop(int(coord[0]), int(coord[1]))
+                    score += int(coord[2])
     # drow poop
     for i in poop_location.split(":"):
         if i != "":
@@ -258,23 +330,59 @@ def drawGame(screen):
         if i != "":
             coord = i.split(",")
             drawGeese(screen, int(coord[0]), int(coord[1]), int(coord[2]))
+
+
+
     # draw player
     screen.blit(player_image, (player_x, player_y))
     draw.rect(screen, RED, player_rect, 2) # player hitbox
 
+    # draw hearts
+    for i in range(hearts):
+        screen.blit(heart, (180 + i * 30, 20))
+
+    # draw score
+    score_text = neue_font.render("Score: " + str(score), True, WHITE)
+    screen.blit(score_text, (10, 10))
+
+    # draw num poops
+    total_poops = 0
+    for i in poop_location.split(":"):
+        if i != "":
+            total_poops += 1
+
+    poop_text = neue_font.render("Poops: " + str(total_poops) + "/" + str(max_poops), True, WHITE)
+    screen.blit(poop_text, (10, 50))
+    if total_poops >= max_poops:
+        currentState = GAME_OVER
+
 def drawInstructions(screen):
     screen.fill(BLACK)
 
+def drawGameOver(screen):
+    global score
+
+    # text for game over
+    game_over_text = neue_font_bold.render("Game Over", True, WHITE)
+    score_text = neue_font.render("Score: " + str(score), True, WHITE) # score
+    time_survived_text = neue_font.render("Time Survived: " + str(int(time_survived)) + "s", True, WHITE) # total time survived
+
+    # text background
+    draw.rect(screen, GRAY, (width/2 - time_survived_text.get_width()/2 - 10, height/2 - 50, time_survived_text.get_width() + 20, 200))
+
+    # blit text to screen
+    screen.blit(game_over_text, (width/2 - game_over_text.get_width()/2, height/2 - game_over_text.get_height()/2))
+    screen.blit(score_text, (width/2 - score_text.get_width()/2, height/2 - score_text.get_height()/2 + 50))
+    screen.blit(time_survived_text, (width/2 - time_survived_text.get_width()/2, height/2 - time_survived_text.get_height()/2 + 100))
+
+
 # Game Loop
-mx, my = 0, 0
-running = True
 while running:
     button = 0
 
     for e in event.get():
         if e.type == QUIT:
             running = False
-        
         if e.type == MOUSEBUTTONDOWN:
             mx, my = e.pos                             
             button = e.button
@@ -305,9 +413,12 @@ while running:
         currentState = drawMenu(screen, mx, my, button, currentState)
     elif currentState == GAME:
         drawGame(screen)
+        time_survived = time.get_ticks() / 1000
         
     elif currentState == INSTRUCTIONS:
         drawInstructions(screen)
+    elif currentState == GAME_OVER:
+        drawGameOver(screen)
     else:
         running = False
 

@@ -10,7 +10,7 @@ pygame.init() # Initialize pygame
 
 # setup the file
 file_handle = open("A3P5file.txt", "w")
-file_handle.write("Greeting Planet Type\nHello World Caesar")
+file_handle.write("carry own rain along person\nBring your umbrella with you")
 file_handle.close()
 
 # setup display
